@@ -1,3 +1,4 @@
+import json
 import os
 from pathlib import Path
 
@@ -21,9 +22,11 @@ def ignore_filepath(filepath, ignored_files):
             return True
     return False
 
-def prepare_files_list(ignored_files):
+def prepare_files_list():
     """
     """
+    ignored_files = read_gitignore()
+
     file_list = []
     for root, _, files in os.walk("."):
         for file in files:
@@ -32,4 +35,5 @@ def prepare_files_list(ignored_files):
                 with open(filepath, "r") as f:
                     content = f.read()
                 file_list.append({"name": filepath, "content": content})
-    return file_list
+    
+    return json.dumps(file_list)
