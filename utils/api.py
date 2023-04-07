@@ -11,10 +11,10 @@ def gpt_gen(data):
 
     completions = openai.Completion.create(
         engine="text-davinci-003",
-        prompt=f"Analyze the following Python files and generate a README.md and a user-friendly documentation.md:\n{data}",
+        prompt=f"Analyze the following code repository and generate a user-friendly readme.md:\n{data}",
         max_tokens=2048,
         n=1,
         stop=None,
     )
 
-    print(completions.choices[0])
+    return completions.choices[0]

@@ -12,15 +12,13 @@ def main():
 
     # Write the received README.md and documentation.md to the root directory
     with open("README.md", "w") as readme_file:
-        readme_file.write(response["readme"])
-    with open("documentation.md", "w") as documentation_file:
-        documentation_file.write(response["documentation"])
+        readme_file.write(response['text'])
 
     # Commit and push the changes to the repository
-    repo = Repo(".")
-    repo.git.add("README.md")
-    repo.git.add("documentation.md")
-    repo.git.commit("-m", "Automatically generated README and documentation.")
+    # repo = Repo(".")
+    # repo.git.add("README.md")
+    # repo.git.add("documentation.md")
+    # repo.git.commit("-m", "Automatically generated README and documentation.")
     # repo.git.push()
 
 if __name__ == "__main__":
