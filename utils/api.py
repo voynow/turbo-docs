@@ -1,10 +1,13 @@
 import requests
 import json
+import openai
+
+# openai.api_key = input("Please enter your openAI API key: ")
+from utils import secrets_manager
+openai.api_key = secrets_manager.get_secrets()['openai_secret_key']
+
 
 def gpt_gen(data):
-    import openai
-    openai.api_key = "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"
-    # openai.api_key = input("Please enter your openAI API key: ")
 
     completions = openai.Completion.create(
         engine="text-davinci-003",
