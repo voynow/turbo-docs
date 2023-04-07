@@ -1,27 +1,25 @@
 
+# Readme
 
-# README Generator
+This repository contains a python script that generates a user friendly readme file based on the contents of the code repository. 
 
-Welcome to the README Generator! This repository provides a quick and easy way to generate a user-friendly README.md for any code repository.
-
-## Features
-
-- Automatically generate a README.md file and documentation.md file from any code repository.
-- Uses OpenAI's GPT-3 model to generate text based on the content of the code repository.
-- Exclude files that are specified in the `.gitignore` file.
-
-## Requirements
-
-- Requests library
-- GitPython library
-- OpenAI library
+The script uses the OpenAI ChatGPT API to generate the readme and the `utils` folder contains the functions used to interact with the API.
 
 ## Usage
 
-1. Clone this repository and install the necessary requirements.
-2. Provide your OpenAI API key in the `utils/secrets_manager.py` file.
-3. Run `python main.py` to generate the README.md and documentation.md and commit them to the repository.
+To generate a readme for your code repository, you will need an OpenAI API key. It can be obtained for free here: https://openai.com/
 
-## Contribute
+Once you have an API key, follow the steps below:
 
-We welcome all contributions! Please open up a pull request or an issue if you want to suggest any changes.
+1. Make sure the repo is cloned on your local machine.
+2. Create a `.gitignore` file to exclude any files from the readme generation.
+3. Open `main.py` and enter your OpenAI API key on line 8.
+4. Run `python main.py` to generate the README.md.
+5. The generated README will be committed to the repo and pushed to the remote repository.
+
+## Requirements
+
+This script requires the following libraries to be installed on your system:
+- Requests
+- GitPython
+- OpenAI
