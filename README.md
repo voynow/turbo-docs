@@ -1,25 +1,24 @@
 
-# Readme
 
-This repository contains a python script that generates a user friendly readme file based on the contents of the code repository. 
+# Welcome 
+This repository provides a code for automatically generating README.md files from code repositories, using advanced language models in OpenAI.
 
-The script uses the OpenAI ChatGPT API to generate the readme and the `utils` folder contains the functions used to interact with the API.
+## Prerequisites
+- [requests](https://pypi.org/project/requests/)
+- [GitPython](https://pypi.org/project/GitPython/)
+- [OpenAI API](https://openai.com/api/)
+
+## Installation 
+```
+pip install -r requirements.txt
+```
 
 ## Usage
 
-To generate a readme for your code repository, you will need an OpenAI API key. It can be obtained for free here: https://openai.com/
+1. Enter your OpenAI API key when prompted.
+2. Run `python main.py`.
+3. A README.md file will be generated and saved in the root directory.
+4. The changes will be committed and pushed to the repository.
 
-Once you have an API key, follow the steps below:
-
-1. Make sure the repo is cloned on your local machine.
-2. Create a `.gitignore` file to exclude any files from the readme generation.
-3. Open `main.py` and enter your OpenAI API key on line 8.
-4. Run `python main.py` to generate the README.md.
-5. The generated README will be committed to the repo and pushed to the remote repository.
-
-## Requirements
-
-This script requires the following libraries to be installed on your system:
-- Requests
-- GitPython
-- OpenAI
+## License 
+[MIT](https://choosealicense.com/licenses/mit/)
