@@ -1,17 +1,22 @@
 
-# User-Friendly Readme.md
 
-# Welcome!
+# README.md
+This repository contains the code necessary to generate a README.md file from a given folder. It utilizes the OpenAI API to generate the content of the file.
 
-This repository contains code that can be used to generate a user-friendly plain text readme.md file. It uses the Open AI GPT-3 API to automatically generate the readme.md by analyzing the file structure of a given code repository. 
+The `driver()` function found in `generate.py` does the following:
+1. Gathers the content of all files in the current folder and subfolders, excluding files from the `.gitignore` file.
+2. Sends this content to the OpenAI API for completion.
+3. Writes the response to the root directory with the name `README.md`.
+4. Commits and pushes the changes to the repository.
 
-## Requirements
+This process assumes that the repository contains the necessary `requirements.txt` file, listing the packages that need to be installed, and a `utils` folder, containing both the `directory.py` and the `openai_api.py` scripts.
 
-In order to use the generate.py script, the following packages must be installed:
-* requests 
-* GitPython 
-* openai 
+The `directory.py` script handles the gathering of the repository's content and the exclusion of ignored files. Its main function is `get_directory_text()`, which returns a string with all the content in the repository.
 
-## Usage
+The `openai_api.py` script contains a wrapper function for the OpenAI API, called `gpt_completion_wrapper()`, which sends the prompt to the API and returns the completion.
 
-To generate a readme.md, simply run the `generate.py` script, which will use the Open AI GPT-3 API to analyze the file structure of the code repository and generate a user-friendly readme.md file. The generated README.md will be saved to the repository root directory and automatically committed and pushed.
+Finally, the `requirements.tx` file contains the necessary packages for the project, such as `requests` and `GitPython`. The additional package `openai` is required for the API's functioning.
+
+In order to use this project, the API key should be added manually to the `openai_api.py`file, prompting the user for input before calling the API.
+
+This project is Open Source and anyone is free to use and modify it, as long as they adhere to the license agreement. Enjoy!
