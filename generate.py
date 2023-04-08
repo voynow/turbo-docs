@@ -1,11 +1,11 @@
 import click
 from git import Repo
-from utils import directory, openai_api
+from utils import directory, openai_api, cli_options
 
 
 @click.command()
-@click.option('--output_text', default=False, is_flag=True, help='Display the directory text before generating the README.md file.')
-@click.option('--git_operations', default=False, is_flag=True, help='Perform Git operations (add, commit, and push) for the generated README.md file.')
+@click.option(cli_options.output_text)
+@click.option(cli_options.git_operations)
 def driver(output_text, git_operations):
     """
     Generate a README.md file for the current repository, commit, and push the changes (if specified).
