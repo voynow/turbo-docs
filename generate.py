@@ -1,13 +1,11 @@
-
 from git import Repo
-import json
-import os
-
 from utils import directory, openai_api
 
-
 def driver(output_text=True):
-
+    """
+    Generate a README.md file, commit, and push the changes.
+    :param output_text: bool, If True, prints the directory text. Default: True.
+    """
     # Prepare a list of files to send to GPT
     dir_text = directory.get_directory_text()
     if output_text:
@@ -26,7 +24,6 @@ def driver(output_text=True):
     repo.git.add("README.md")
     repo.git.commit("-m", "Automatically generated README.md using GPT")
     repo.git.push()
-
 
 if __name__ == "__main__":
     driver()
