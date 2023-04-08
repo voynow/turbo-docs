@@ -1,18 +1,24 @@
 
-# README.md
-This repository contains the source code and files used to automatically generate a README.md using the openAI GPT-3 API.
+# README
 
-## Requirements
-This code uses the following packages:
+This repository contains a python script to generate a README.md file from the contents of a repository and optionally commit and push the changes.
 
- - Requests
- - GitPython
- - OpenAI
+### Requirements
 
-## How it works
-The generate.py script is the main driver for the code, it reads the content of the current directory and sends it to the openAI API to generate the content of the README.md. The API is invoked through the OpenAI library, which also reads the OpenAI API key from the user.
+- requests
+- GitPython
+- openai
+- click
 
-The content of the directory is determined from the utils/directory.py file, which reads the .gitignore file to determine which files should be ignored, and which files should be included in the directory listing.
+### Usage
 
-## Usage
-To use this code, you need to have an OpenAI API key and the required packages installed, run the generate.py script, and the README.md will be generated and committed to the repository.
+To generate a README.md file, run `python generate.py`. If the `--output_text` flag is set, the script will print the text for the current repository before generating the README.md file. If the `--git_operations` flag is set, the script will add, commit and push the changes for the generated README.md file.  
+The OpenAI API key should be provided when prompted.
+
+### Files
+
+- **generate.py**: The python script to generate a README.md file.
+- **requirements.txt**: The list of the Python dependencies.
+- **utils/cli_options.py**: Command-line options for the generate.py script.
+- **utils/directory.py**: Functions to navigate through the directory structure.
+- **utils/openai_api.py**: Functions to access the OpenAI API.

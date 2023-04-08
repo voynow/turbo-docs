@@ -4,9 +4,9 @@ from utils import directory, openai_api, cli_options
 
 
 @click.command()
-@click.option(cli_options.output_text)
-@click.option(cli_options.git_operations)
-def driver(output_text, git_operations):
+@cli_options.output_text
+@cli_options.git_operations
+def driver(output_text: bool, git_operations: bool):
     """
     Generate a README.md file for the current repository, commit, and push the changes (if specified).
     """

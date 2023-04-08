@@ -1,9 +1,10 @@
 import requests
 import json
-import openai
-openai.api_key = input("Please enter your openAI API key:")
+
 
 def gpt_completion_wrapper(prompt):
+    import openai
+    openai.api_key = input("Please enter your openAI API key:")
     """
     Send a prompt to the OpenAI GPT-3 API and receive a completion.
     :param prompt: str, The prompt to send to the API.
