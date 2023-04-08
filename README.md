@@ -1,24 +1,17 @@
 
+# User-Friendly Readme.md
 
-# Welcome 
-This repository provides a code for automatically generating README.md files from code repositories, using advanced language models in OpenAI.
+# Welcome!
 
-## Prerequisites
-- [requests](https://pypi.org/project/requests/)
-- [GitPython](https://pypi.org/project/GitPython/)
-- [OpenAI API](https://openai.com/api/)
+This repository contains code that can be used to generate a user-friendly plain text readme.md file. It uses the Open AI GPT-3 API to automatically generate the readme.md by analyzing the file structure of a given code repository. 
 
-## Installation 
-```
-pip install -r requirements.txt
-```
+## Requirements
+
+In order to use the generate.py script, the following packages must be installed:
+* requests 
+* GitPython 
+* openai 
 
 ## Usage
 
-1. Enter your OpenAI API key when prompted.
-2. Run `python main.py`.
-3. A README.md file will be generated and saved in the root directory.
-4. The changes will be committed and pushed to the repository.
-
-## License 
-[MIT](https://choosealicense.com/licenses/mit/)
+To generate a readme.md, simply run the `generate.py` script, which will use the Open AI GPT-3 API to analyze the file structure of the code repository and generate a user-friendly readme.md file. The generated README.md will be saved to the repository root directory and automatically committed and pushed.
