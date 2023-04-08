@@ -14,7 +14,7 @@ def driver(output_text=True):
         print(dir_text)
 
     # Send the request to the API
-    prompt = f"Analyze the following code repository and generate a user-friendly readme.md:\n\n{dir_text}"
+    prompt = f"Create a readme.md from the following repository:\n\n{dir_text}"
     response = openai_api.gpt_completion_wrapper(prompt)
 
     # Write the received README.md to the root directory
