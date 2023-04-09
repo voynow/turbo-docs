@@ -1,12 +1,41 @@
-
 # README.md
 
-This repository contains a generate.py file that takes a directory of files and creates a README.md from them using an OpenAI GPT-3 API. It also includes a requirements.txt file that lists the necessary dependencies, along with two utility files for cli_options.py and directory.py. The generate.py file takes two optional command line arguments, --to_clipboard and --git_operations, which can be used to copy the directory text to your clipboard and/or perform git operations after the README.md is generated. 
+This repository is a utility for automatically generating a README.md file based on an existing directory. It is powered by the OpenAI GPT-3 API and includes additional command-line options for further customization. 
 
-Using this repository, you can quickly create a README.md file for any project with just a few simple commands. 
+## Installation
 
-To use generate.py, first make sure that you have all the necessary dependencies installed. Then, run generate.py with the --to_clipboard and --git_operations flags if desired. The generate.py file will then use the OpenAI GPT-3 API to generate a README.md based on the structure of the current repository and any flags specified. 
+Clone the repository:
 
-If the --git_operations flag was specified, then the generate.py file will commit and push the new README.md to the repository. Now, you have a README.md file that accurately reflects the structure and contents of the repository for people to explore. 
+```
+git clone https://github.com/your_username/repository_name.git
+```
 
-Happy coding!
+Install the dependencies:
+
+```
+pip install -r requirements.txt
+```
+
+## Usage
+
+To generate the README.md file, run the following command:
+
+```
+python generate.py
+```
+
+The command takes the following options:
+
+`--to_clipboard` &mdash; this option copies the directory text to the clipboard. This can be used in the ChatGPT webapp.
+
+`--git_operations` &mdash; this option performs Git operations (add, commit, and push) for the generated README.md file.
+
+`--create_readme` &mdash; this option generates a README.md file for the current repository.
+
+## Contributing
+
+Pull requests and bug reports are welcome on GitHub at https://github.com/your_username/repository_name. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
+
+## License
+
+The code is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
