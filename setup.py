@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 
 setup(
-    name="my-package",
+    name="turbo_docs",
     version="0.1",
     packages=find_packages(),
     install_requires=[
@@ -12,7 +12,7 @@ setup(
     ],
     entry_points={
         "console_scripts": [
-            "my-package=my_package.generate:driver"
+            "turbo_docs=turbo_docs.generate:driver"
         ],
     },
     classifiers=[
