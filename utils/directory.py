@@ -1,8 +1,9 @@
 import json
 import os
 from pathlib import Path
+from typing import List
 
-def ignored_files_init():
+def ignored_files_init() -> List[str]:
     """
     Initialize a list of ignored files and including README.md, dir_text.txt, etc.
     :return: list, The list of ignored files.
@@ -13,7 +14,7 @@ def ignored_files_init():
             ignored_files.append(file)
     return ignored_files
 
-def read_gitignore():
+def read_gitignore() -> List[str]:
     """
     Read .gitignore file and return the list of ignored files.
     :return: list, The list of ignored files.
@@ -27,7 +28,7 @@ def read_gitignore():
         raise ValueError(".gitignore file required for excluding files from documentation generation")
     return ignore_files
 
-def ignore_filepath(filepath, ignore_files):
+def ignore_filepath(filepath: str, ignore_files: List[str]) -> bool:
     """
     Check if a filepath should be ignored based on the ignore_files list.
     :param filepath: str, The filepath to check.
@@ -39,15 +40,7 @@ def ignore_filepath(filepath, ignore_files):
             return True
     return False
 
-def read_file(file):
-    """
-    Read a file and replace multiple spaces with tabs and consecutive newlines with a single newline.
-    :param file: file object, The file to read.
-    :return: str, The formatted content of the file.
-    """
-
-
-def get_directory_text():
+def get_directory_text() -> str:
     """
     Get the text representation of the current directory, excluding ignored files.
     :return: str, The text representation of the directory.
@@ -63,7 +56,7 @@ def get_directory_text():
             # If not in ignore, collect file text
             if not ignore_filepath(filepath, ignore_files):
                 with open(filepath, "r") as f:
-                        content = f.read().replace(" " * 4, "\t")
+                    content = f.read().replace(" " * 4, "\t")
                 dir_text += f"{filepath}:\n\n{content}\n\n"
-    
+
     return dir_text

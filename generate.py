@@ -2,13 +2,13 @@ import click
 from git import Repo
 import pyperclip
 from utils import directory, openai_api, cli_options
-
+from typing import Callable
 
 @click.command()
-@cli_options.output_text
+@cli_options.to_clipboard
 @cli_options.git_operations
 @cli_options.create_readme
-def driver(to_clipboard: bool, git_operations: bool, create_readme: bool):
+def driver(to_clipboard: bool, git_operations: bool, create_readme: bool) -> None:
     """
     Generates a README.md file for the current repository, commits, and pushes the changes (if specified).
     
@@ -30,7 +30,7 @@ def driver(to_clipboard: bool, git_operations: bool, create_readme: bool):
         with open("README.md", "w") as readme_file:
             readme_file.write(response['text'])
         print("Generated README.md")
-                
+
     # Perform Git operations if specified
     if git_operations:
         repo = Repo(".")

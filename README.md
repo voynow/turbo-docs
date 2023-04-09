@@ -7,7 +7,7 @@ This repository is a tool for generating a README.md file for any given reposito
 Clone the repository using the following commands:
 
 ```
-git clone https://github.com/<repo-name>
+git clone https://github.com/voynow/turbo-docs.git
 ```
 
 Ensure that you have Python 3.6 or later installed, and then install the required packages with:
