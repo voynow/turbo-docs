@@ -4,14 +4,13 @@ from pathlib import Path
 
 def ignored_files_init():
     """
-    Initialize a list of ignored files starting with a dot (.) and including README.md.
+    Initialize a list of ignored files and including README.md, dir_text.txt, etc.
     :return: list, The list of ignored files.
     """
-    ignored_files = []
+    ignored_files = ["README.md", "dir_text.txt"]
     for file in os.listdir():
         if file[0] == ".":
             ignored_files.append(file)
-    ignored_files.append("README.md")
     return ignored_files
 
 def read_gitignore():

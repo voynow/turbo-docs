@@ -1,24 +1,12 @@
 
-# README
+# README.md
 
-This repository contains a python script to generate a README.md file from the contents of a repository and optionally commit and push the changes.
+This repository contains a generate.py file that takes a directory of files and creates a README.md from them using an OpenAI GPT-3 API. It also includes a requirements.txt file that lists the necessary dependencies, along with two utility files for cli_options.py and directory.py. The generate.py file takes two optional command line arguments, --to_clipboard and --git_operations, which can be used to copy the directory text to your clipboard and/or perform git operations after the README.md is generated. 
 
-### Requirements
+Using this repository, you can quickly create a README.md file for any project with just a few simple commands. 
 
-- requests
-- GitPython
-- openai
-- click
+To use generate.py, first make sure that you have all the necessary dependencies installed. Then, run generate.py with the --to_clipboard and --git_operations flags if desired. The generate.py file will then use the OpenAI GPT-3 API to generate a README.md based on the structure of the current repository and any flags specified. 
 
-### Usage
+If the --git_operations flag was specified, then the generate.py file will commit and push the new README.md to the repository. Now, you have a README.md file that accurately reflects the structure and contents of the repository for people to explore. 
 
-To generate a README.md file, run `python generate.py`. If the `--output_text` flag is set, the script will print the text for the current repository before generating the README.md file. If the `--git_operations` flag is set, the script will add, commit and push the changes for the generated README.md file.  
-The OpenAI API key should be provided when prompted.
-
-### Files
-
-- **generate.py**: The python script to generate a README.md file.
-- **requirements.txt**: The list of the Python dependencies.
-- **utils/cli_options.py**: Command-line options for the generate.py script.
-- **utils/directory.py**: Functions to navigate through the directory structure.
-- **utils/openai_api.py**: Functions to access the OpenAI API.
+Happy coding!

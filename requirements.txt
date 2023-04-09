@@ -2,3 +2,4 @@ requests
 GitPython
 openai
 click
+pyperclip

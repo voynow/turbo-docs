@@ -1,10 +1,14 @@
-import requests
 import json
+import os
+import openai
+
+openai.api_key = os.environ.get('OPENAI_API_KEY')
+if not openai.api_key:
+    raise ValueError("Cannot find API key. Run the following command: export OPENAI_API_KEY=<your_api_key>")
 
 
 def gpt_completion_wrapper(prompt):
-    import openai
-    openai.api_key = input("Please enter your openAI API key:")
+    
     """
     Send a prompt to the OpenAI GPT-3 API and receive a completion.
     :param prompt: str, The prompt to send to the API.
