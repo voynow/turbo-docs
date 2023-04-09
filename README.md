@@ -1,24 +1,41 @@
+# README.md
 
-# README
+This repository is a tool for generating a README.md file for any given repository. It uses an OpenAI GPT-3 API to generate a custom README file based on the directory structure of the repository. It can also optionally copy the directory text to the clipboard, and perform standard Git operations (add, commit, and push) for the generated README.md file.
 
-This repository contains a python script to generate a README.md file from the contents of a repository and optionally commit and push the changes.
+## Installation
 
-### Requirements
+Clone the repository using the following commands:
 
-- requests
-- GitPython
-- openai
-- click
+```
+git clone https://github.com/voynow/turbo-docs.git
+```
 
-### Usage
+Ensure that you have Python 3.6 or later installed, and then install the required packages with:
 
-To generate a README.md file, run `python generate.py`. If the `--output_text` flag is set, the script will print the text for the current repository before generating the README.md file. If the `--git_operations` flag is set, the script will add, commit and push the changes for the generated README.md file.  
-The OpenAI API key should be provided when prompted.
+```
+pip install -r requirements.txt
+```
 
-### Files
+You will also need to export your OpenAI API key as an environment variable before running the program:
 
-- **generate.py**: The python script to generate a README.md file.
-- **requirements.txt**: The list of the Python dependencies.
-- **utils/cli_options.py**: Command-line options for the generate.py script.
-- **utils/directory.py**: Functions to navigate through the directory structure.
-- **utils/openai_api.py**: Functions to access the OpenAI API.
+```
+export OPENAI_API_KEY={Your API Key Here}
+```
+
+## Usage
+
+To generate a README.md file for your repository, run the following command from the top-level of your repository:
+
+```
+python generate.py
+```
+
+This will generate a README.md file for your repository. You can also specify the following optional flags:
+
+- `--to_clipboard`: Copy the directory text to clipboard. This can be used in the ChatGPT webapp.
+- `--git_operations`: Perform Git operations (add, commit, and push) for the generated README.md file.
+- `--create_readme`: Generate README.md file.
+
+## License
+
+This project is licensed under the [MIT License](https://github.com/<repo-name>/LICENSE).

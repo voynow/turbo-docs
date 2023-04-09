@@ -1,35 +1,43 @@
 import click
 from git import Repo
+import pyperclip
 from utils import directory, openai_api, cli_options
-
+from typing import Callable
 
 @click.command()
-@cli_options.output_text
+@cli_options.to_clipboard
 @cli_options.git_operations
-def driver(output_text: bool, git_operations: bool):
+@cli_options.create_readme
+def driver(to_clipboard: bool, git_operations: bool, create_readme: bool) -> None:
     """
-    Generate a README.md file for the current repository, commit, and push the changes (if specified).
+    Generates a README.md file for the current repository, commits, and pushes the changes (if specified).
+    
+    :param to_clipboard: bool, If True, copies the directory text to the clipboard.
+    :param git_operations: bool, If True, performs Git operations (add, commit, and push) for the generated README.md file.
+    :param create_readme: bool, If True, generates a README.md file for the current repository.
     """
-    # Prepare a list of files to send to GPT
     dir_text = directory.get_directory_text()
 
-    # Send the request to the API
-    prompt = f"Create a readme.md from the following repository:\n\n{dir_text}"
-    response = openai_api.gpt_completion_wrapper(prompt)
+    # Copy directory text to clipboard if specified
+    if to_clipboard:
+        pyperclip.copy(dir_text)
+        print("Directory text copied to clipboard")
 
-    # Write the received README.md to the root directory
-    with open("README.md", "w") as readme_file:
-        readme_file.write(response['text'])
+    # Generate README.md file if specified
+    if create_readme:
+        prompt = f"Create a readme.md for the following repository:\n\n{dir_text}"
+        response = openai_api.gpt_completion_wrapper(prompt)
+        with open("README.md", "w") as readme_file:
+            readme_file.write(response['text'])
+        print("Generated README.md")
 
-    if output_text:
-        print(dir_text)
-    
-    # Perform Git operations if the flag is set
+    # Perform Git operations if specified
     if git_operations:
         repo = Repo(".")
         repo.git.add("README.md")
         repo.git.commit("-m", "Automatically generated README.md using GPT")
         repo.git.push()
+        print("Performed Git operations add, commit, and push")
 
 if __name__ == '__main__':
     driver()
