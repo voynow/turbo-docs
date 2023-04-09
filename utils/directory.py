@@ -45,10 +45,7 @@ def read_file(file):
     :param file: file object, The file to read.
     :return: str, The formatted content of the file.
     """
-    file_open = file.read()
-    for r in [(" " * 4, "\t"), ("\n\n", "\n")]:
-        file_open = file_open.replace(*r)
-    return file_open
+
 
 def get_directory_text():
     """
@@ -58,15 +55,15 @@ def get_directory_text():
     dir_text = ""
     ignore_files = read_gitignore()
 
-    # iterate over files
+    # Iterate over files
     for root, _, files in os.walk("."):
         for file in files:
             filepath = os.path.join(root.replace(".\\", ""), file)
 
-            # if not in ignore collect file text
+            # If not in ignore, collect file text
             if not ignore_filepath(filepath, ignore_files):
                 with open(filepath, "r") as f:
-                    content = read_file(f)
+                        content = f.read().replace(" " * 4, "\t")
                 dir_text += f"{filepath}:\n\n{content}\n\n"
     
     return dir_text

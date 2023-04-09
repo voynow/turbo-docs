@@ -10,16 +10,20 @@ from utils import directory, openai_api, cli_options
 @cli_options.create_readme
 def driver(to_clipboard: bool, git_operations: bool, create_readme: bool):
     """
-    Generate a README.md file for the current repository, commit, and push the changes (if specified).
+    Generates a README.md file for the current repository, commits, and pushes the changes (if specified).
+    
+    :param to_clipboard: bool, If True, copies the directory text to the clipboard.
+    :param git_operations: bool, If True, performs Git operations (add, commit, and push) for the generated README.md file.
+    :param create_readme: bool, If True, generates a README.md file for the current repository.
     """
     dir_text = directory.get_directory_text()
 
-    # copy directory to clipboard
+    # Copy directory text to clipboard if specified
     if to_clipboard:
         pyperclip.copy(dir_text)
         print("Directory text copied to clipboard")
 
-    # create readme file
+    # Generate README.md file if specified
     if create_readme:
         prompt = f"Create a readme.md for the following repository:\n\n{dir_text}"
         response = openai_api.gpt_completion_wrapper(prompt)
@@ -27,13 +31,13 @@ def driver(to_clipboard: bool, git_operations: bool, create_readme: bool):
             readme_file.write(response['text'])
         print("Generated README.md")
                 
-        # Perform Git operations
-        if git_operations:
-            repo = Repo(".")
-            repo.git.add("README.md")
-            repo.git.commit("-m", "Automatically generated README.md using GPT")
-            repo.git.push()
-            print("Performed Git operations add, commit, and push")
+    # Perform Git operations if specified
+    if git_operations:
+        repo = Repo(".")
+        repo.git.add("README.md")
+        repo.git.commit("-m", "Automatically generated README.md using GPT")
+        repo.git.push()
+        print("Performed Git operations add, commit, and push")
 
 if __name__ == '__main__':
     driver()

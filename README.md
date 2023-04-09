@@ -1,41 +1,41 @@
 # README.md
 
-This repository is a utility for automatically generating a README.md file based on an existing directory. It is powered by the OpenAI GPT-3 API and includes additional command-line options for further customization. 
+This repository is a tool for generating a README.md file for any given repository. It uses an OpenAI GPT-3 API to generate a custom README file based on the directory structure of the repository. It can also optionally copy the directory text to the clipboard, and perform standard Git operations (add, commit, and push) for the generated README.md file.
 
 ## Installation
 
-Clone the repository:
+Clone the repository using the following commands:
 
 ```
-git clone https://github.com/your_username/repository_name.git
+git clone https://github.com/<repo-name>
 ```
 
-Install the dependencies:
+Ensure that you have Python 3.6 or later installed, and then install the required packages with:
 
 ```
 pip install -r requirements.txt
 ```
 
+You will also need to export your OpenAI API key as an environment variable before running the program:
+
+```
+export OPENAI_API_KEY={Your API Key Here}
+```
+
 ## Usage
 
-To generate the README.md file, run the following command:
+To generate a README.md file for your repository, run the following command from the top-level of your repository:
 
 ```
 python generate.py
 ```
 
-The command takes the following options:
+This will generate a README.md file for your repository. You can also specify the following optional flags:
 
-`--to_clipboard` &mdash; this option copies the directory text to the clipboard. This can be used in the ChatGPT webapp.
-
-`--git_operations` &mdash; this option performs Git operations (add, commit, and push) for the generated README.md file.
-
-`--create_readme` &mdash; this option generates a README.md file for the current repository.
-
-## Contributing
-
-Pull requests and bug reports are welcome on GitHub at https://github.com/your_username/repository_name. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
+- `--to_clipboard`: Copy the directory text to clipboard. This can be used in the ChatGPT webapp.
+- `--git_operations`: Perform Git operations (add, commit, and push) for the generated README.md file.
+- `--create_readme`: Generate README.md file.
 
 ## License
 
-The code is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
+This project is licensed under the [MIT License](https://github.com/<repo-name>/LICENSE).

@@ -8,7 +8,6 @@ if not openai.api_key:
 
 
 def gpt_completion_wrapper(prompt):
-    
     """
     Send a prompt to the OpenAI GPT-3 API and receive a completion.
     :param prompt: str, The prompt to send to the API.
