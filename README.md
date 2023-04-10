@@ -1,62 +1,28 @@
 
+
 # turbo_docs
 
-[![Development Status](https://img.shields.io/badge/Development-3%20--%20Alpha-yellowgreen)](https://shields.io/)
-[![License](https://img.shields.io/badge/License-MIT-blue)](https://shields.io/)
-[![Python Versions](https://img.shields.io/badge/Python-3.6%20--%203.9-blue)](https://shields.io/)
-
-turbo_docs is a python package for generating documentation for a repositoory.
-
-## Installation
-
-For users that just want to install, use the following command:
-
-```bash
-pip install turbo_docs
-```
-
-For developers that want to install in "editable" mode, use the following commands:
-
-```bash
-pip install -e .[dev]
-```
+A command line tool to quickly generate formatted & user-friendly README.md files for small & large repositories.
 
 ## Requirements
 
-To use Turbo Docs, you are required to have the following installed: 
+* `setuptools`
+* `wheel`
+* `twine`
+* `requests`
+* `openai`
+* `click`
+* `pyperclip`
 
-- setuptools
-- wheel
-- twine
+## Running
 
-Activate your OpenAI API key by running the following code:
+Install the requirements with `pip install -r requirements.txt` and then run `python setup.py install`.
 
-```bash
-export OPENAI_API_KEY=<your_api_key>
-```
+The main driver function for `turbo_docs` is invoked with the `turbo_docs` command from the terminal.
 
 ## Usage
 
-Using Turbo Docs is simple:
-
-```bash
-turbo_docs --create_readme --create_readme_plus --copy
-```
-
-This will generate a well-formatted README.md, while also summarizing the code and copying the text to the clipboard.
-
-## Development
-
-Install the development dependencies by running the command provided earlier.
-
-Use the entry point `turbo_docs` to run the code.
-
-To customise the options availabe, goto `turbo_docs/utils/cli_options.py`
-
-## Contributing
-
-Feel free to contribute to this project by forking this repo and submit Pull Requests for patches, fixes, new features etc.
-
-## License
-
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+`turbo_docs` takes the following options and generate README.md files accordingly:
+* `--copy`: Copy the directory text to clipboard
+* `--create_readme`: Generate README.md file
+* `--create_readme_plus`: Generate readme for larger repositories
