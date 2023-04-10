@@ -1,4 +1,0 @@
-requests
-openai
-click
-pyperclip
