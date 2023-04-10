@@ -8,10 +8,7 @@ if not openai.api_key:
 
 
 def gpt_completion_wrapper(prompt):
-    """
-    Send a prompt to the OpenAI GPT-3 API and receive a completion.
-    :param prompt: str, The prompt to send to the API.
-    :return: dict, The choice object containing the generated text.
+    """ Send a prompt to the OpenAI GPT-3 API and receive a completion.
     """
     completions = openai.Completion.create(
         engine="text-davinci-003",
@@ -22,15 +19,3 @@ def gpt_completion_wrapper(prompt):
     )
     return completions.choices[0]['text']
 
-
-# def gpt_chat_wrapper(prompt):
-#     """
-#     """
-#     completions = openai.ChatCompletion.create(
-#         model="gpt-3.5-turbo",
-#         messages=[
-#                 {"role": "system", "content": "You are a software engineering assistant."},
-#                 {"role": "user", "content": prompt}
-#             ]
-#     )
-#     return completions.choices[0]['message']['content']

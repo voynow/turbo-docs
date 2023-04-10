@@ -1,37 +1,62 @@
 
-# README.md
+# turbo_docs
 
-turbo_docs is a package for generating a detailed and formatted README.md for a given code repository. It does this by using [OpenAI's GPT-3](https://openai.com/blog/openai-api/) technology to generate detailed descriptions of the given code based on the code structure and files.
+[![Development Status](https://img.shields.io/badge/Development-3%20--%20Alpha-yellowgreen)](https://shields.io/)
+[![License](https://img.shields.io/badge/License-MIT-blue)](https://shields.io/)
+[![Python Versions](https://img.shields.io/badge/Python-3.6%20--%203.9-blue)](https://shields.io/)
 
-## Prerequisites
-- Python 3.6+
-- Run `pip install -r requirements.dev.txt` to install necessary development dependencies.
-  - setuptools
-  - wheel
-  - twine
-- Run `pip install -r requirements.txt` to install necessary application dependencies.
-  - requests
-  - openai
-  - click
-  - pyperclip
+turbo_docs is a python package for generating documentation for a repositoory.
 
 ## Installation
-1. Clone this repository.
-2. `python setup.py install`
+
+For users that just want to install, use the following command:
+
+```bash
+pip install turbo_docs
+```
+
+For developers that want to install in "editable" mode, use the following commands:
+
+```bash
+pip install -e .[dev]
+```
+
+## Requirements
+
+To use Turbo Docs, you are required to have the following installed: 
+
+- setuptools
+- wheel
+- twine
+
+Activate your OpenAI API key by running the following code:
+
+```bash
+export OPENAI_API_KEY=<your_api_key>
+```
 
 ## Usage
 
-The main entry point is the `turbo_docs` command.
+Using Turbo Docs is simple:
 
+```bash
+turbo_docs --create_readme --create_readme_plus --copy
 ```
-$ turbo_docs --help
-Usage: turbo_docs [OPTIONS]
 
-Main driver function that generates a README.md file for the current repository.
+This will generate a well-formatted README.md, while also summarizing the code and copying the text to the clipboard.
 
-Options:
-  --copy                 Copy the directory text to clipboard. This can be used
-                         in the ChatGPT webapp.
-  --create_readme        Generate README.md file
-  --help                 Show this message and exit.
-```
+## Development
+
+Install the development dependencies by running the command provided earlier.
+
+Use the entry point `turbo_docs` to run the code.
+
+To customise the options availabe, goto `turbo_docs/utils/cli_options.py`
+
+## Contributing
+
+Feel free to contribute to this project by forking this repo and submit Pull Requests for patches, fixes, new features etc.
+
+## License
+
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
