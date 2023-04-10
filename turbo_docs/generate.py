@@ -24,7 +24,7 @@ def driver(copy: bool, create_readme: bool) -> None:
         prompt = f"Create a detailed/formatted readme.md for the following code:\n\n{dir_text}"
         response = openai_api.gpt_completion_wrapper(prompt)
         with open("README.md", "w") as readme_file:
-            readme_file.write(response['text'])
+            readme_file.write(response)
         print("(--create_readme) Generated README.md")
 
 if __name__ == '__main__':

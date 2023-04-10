@@ -20,4 +20,17 @@ def gpt_completion_wrapper(prompt):
         n=1,
         stop=None,
     )
-    return completions.choices[0]
+    return completions.choices[0]['text']
+
+
+# def gpt_chat_wrapper(prompt):
+#     """
+#     """
+#     completions = openai.ChatCompletion.create(
+#         model="gpt-3.5-turbo",
+#         messages=[
+#                 {"role": "system", "content": "You are a software engineering assistant."},
+#                 {"role": "user", "content": prompt}
+#             ]
+#     )
+#     return completions.choices[0]['message']['content']
