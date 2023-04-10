@@ -16,3 +16,11 @@ def create_readme(func: Callable) -> Callable:
         is_flag=True,
         help='Generate README.md file'
     )(func)
+
+def create_readme_plus(func: Callable) -> Callable:
+    return click.option(
+        '--create_readme_plus',
+        default=False,
+        is_flag=True,
+        help='Generate readme for larger repositories'
+    )(func)
