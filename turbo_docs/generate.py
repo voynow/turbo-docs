@@ -1,6 +1,6 @@
 import click
 import pyperclip
-from utils import directory, openai_api, cli_options
+from turbo_docs.utils import directory, openai_api, cli_options
 
 @click.command()
 @cli_options.copy
