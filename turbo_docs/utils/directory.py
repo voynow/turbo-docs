@@ -6,7 +6,7 @@ from typing import List, Dict
 def ignored_files_init() -> List[str]:
     """ Initialize a list of ignored files and including README.md, docs.md, etc.
     """
-    ignored_files = ["README.md", "docs.md"]
+    ignored_files = ["README.md", "tests"]
     for file in os.listdir():
         if file[0] == ".":
             ignored_files.append(file)
