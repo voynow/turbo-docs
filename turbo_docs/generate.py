@@ -8,11 +8,19 @@ from turbo_docs.utils import directory, openai_api, cli_options
 def run_create_readme(text):
     """ Generate a formatted and user-friendly README.md file using the provided text.
     """
+    readme = "README.md"
     prompt = f"Create a formatted & user-friendly readme.md from the following:\n\n{text}"
     response = openai_api.gpt_completion_wrapper(prompt)
-    with open("README.md", "w") as readme_file:
-        readme_file.write(response)
+    try:
+        with open(readme, "w") as readme_file:
+            readme_file.write(response)
+    except PermissionError:
+        os.remove(readme)
+        with open(readme, "w") as readme_file:
+            readme_file.write(response)
     print(f"(--create_readme) Generated README.md")
+
+
 
 
 def run_create_readme_plus(files):
@@ -25,8 +33,8 @@ def run_create_readme_plus(files):
             prompt = f"Create a README summarizing the following code, especially maintaining key logic:\n{file_content}"
             responses[file_path] = openai_api.gpt_completion_wrapper(prompt)
 
-    psuedocode = "\n\n\n".join([f"{file_path}:\n{summary}" for file_path, summary in responses.items()])
-    run_create_readme(psuedocode)
+    flatmap = "\n\n\n".join([f"{file_path}:\n{summary}" for file_path, summary in responses.items()])
+    run_create_readme(flatmap)
     print(f"(--create_readme_plus) Generated README.md")
 
 
