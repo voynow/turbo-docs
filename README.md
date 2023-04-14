@@ -1,31 +1,53 @@
 
 
-# turbo_docs
+## Turbo-Docs
+Turbo-Docs is a package for Python creating formatted, user-friendly README.md files and unit tests. 
 
-turbo_docs is a speech-to-text generator for Python 3.6 - 3.9. This package enables users to generate a formatted and user-friendly README.md file, generte code summaries, and create unit tests using command-line options. 
+### Installation
+Using pip:
+```bash
+pip install turbo_docs
+```
 
-## Requirements
-The following libraries must be installed: 
-- setuptools
-- wheel 
-- twine 
-- requests 
-- openai 
-- click 
-- pyperclip 
+Using setup.py
+```bash
+python setup.py install
+```
 
-## Usage 
-The package contains the following command-line options for running specified processes: 
-- --copy (true/false): Copy directory text to clipboard
-- --create_readme (true/false): Generate readme file
-- --create_readme_plus (true/false): Generate formatted and user-friendly readme file
-- --create_tests (true/false): Generate unit tests 
+### Usage
+Using the command line: 
+```bash
+turbo_docs [OPTION]
+```
 
+- Create a Formatted and User-Friendly Readme.md file:
 
-The script `generate.driver` serves as the entry point for the package. It uses the OpenAI GPT-3 API to send a user prompt and receive completions with up to 2048 tokens. 
+```bash
+turbo_docs --create_readme
+```
 
-A `.gitignore` file is used to create a list of ignored files, including README.md, tests, and any file in the current directory that starts with a period. The `directory.py` script retrieves the content of unmasked files and stores them in a dictionary. 
+- Create a Formatted and User-Friendly Readme.md file for large repos:
 
-## Development Status
+```bash
+turbo_docs --create_readme_plus
+```
 
-alpha
+- Create Unit Tests for each code file: 
+
+```bash
+turbo_docs --create_tests
+```
+
+### Requirements
+- Python 3.8+
+- Setuptools
+- Wheel
+- Twine
+- OpenAI
+- Requests
+- Click
+- Pyperclip
+
+### Developed by
+
+This code is developed by [Jamie Voynow](https://github.com/voynow), a software developer with an aim to make the process of creating and managing documentation easier. For more information, visit the [GitHub repository](https://github.com/voynow/turbo-docs).

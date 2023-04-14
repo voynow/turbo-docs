@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="turbo_docs",
-    version="0.6.0",
+    version="0.6.1",
     packages=find_packages(),
     install_requires=[
         "requests",
@@ -25,4 +25,5 @@ setup(
         "Programming Language :: Python :: 3.8",
         "Programming Language :: Python :: 3.9",
     ],
+    long_description=open("README.md", encoding="utf-8").read()
 )

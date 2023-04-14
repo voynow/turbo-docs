@@ -22,7 +22,7 @@ def run_create_readme_plus(files):
     for file_path, file_content in files.items():
         if os.stat(file_path).st_size and file_path.split(".")[1]:
             print(f"(--create_readme_plus) Summarizing {file_path}")
-            prompt = f"Summarize the following code, especially maintaining key logic:\n{file_content}"
+            prompt = f"Create a README summarizing the following code, especially maintaining key logic:\n{file_content}"
             responses[file_path] = openai_api.gpt_completion_wrapper(prompt)
 
     psuedocode = "\n\n\n".join([f"{file_path}:\n{summary}" for file_path, summary in responses.items()])
