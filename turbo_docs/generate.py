@@ -14,10 +14,8 @@ def run_create_readme(text):
     try:
         with open(readme, "w") as readme_file:
             readme_file.write(response)
-    except PermissionError:
-        os.remove(readme)
-        with open(readme, "w") as readme_file:
-            readme_file.write(response)
+    except PermissionError as e:
+        raise PermissionError(f"{e}\nYour device is blocking the above operation. Please remove {readme} and try again.")
     print(f"(--create_readme) Generated README.md")
 
 
