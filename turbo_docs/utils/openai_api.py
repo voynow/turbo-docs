@@ -4,7 +4,8 @@ import os
 
 def openai_init():
 	"""
-	"""
+    Initializes the OpenAI library by setting the API key, and checking if it is set. Raises ValueError if API key is not found.
+    """
 	import openai
 	openai.api_key = os.environ.get('OPENAI_API_KEY')
 
@@ -14,8 +15,9 @@ def openai_init():
 
 
 def gpt_completion_wrapper(prompt):
-	""" Send a prompt to the OpenAI GPT-3 API and receive a completion.
 	"""
+    This function wraps an OpenAI package to provide text completion from a given prompt using GPT-3. It uses the "text-davinci-003" engine and returns one completion with up to 2048 tokens.
+    """
 	openai_package = openai_init()
 	completions = openai_package.Completion.create(
 		engine="text-davinci-003",
@@ -24,5 +26,4 @@ def gpt_completion_wrapper(prompt):
 		n=1,
 		stop=None,
 	)
-	return completions.choices[0]['text']
-
+	return completions.choices[0]['text'].strip()
