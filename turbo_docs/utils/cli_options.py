@@ -3,7 +3,7 @@ from typing import Callable
 
 def copy(func: Callable) -> Callable:
 	"""
-    Apply the click option for copying the directory to clipboard on any callable object.
+    Copy a given Callable object to the clipboard. Provides flag --copy to enable/disable the copy.
     """
 	return click.option(
 		'--copy',
@@ -14,7 +14,7 @@ def copy(func: Callable) -> Callable:
 
 def create_readme(func: Callable) -> Callable:
 	"""
-    This function creates a README.md file with a flag parameter to set its generation. This can be used to easily generate a README.md file with a single command. 
+    Add support for a --create_readme flag to a given Callable. When this flag is included, a README.md file will be generated.
     """
 	return click.option(
 		'--create_readme',
@@ -25,7 +25,7 @@ def create_readme(func: Callable) -> Callable:
 
 def create_readme_plus(func: Callable) -> Callable:
 	"""
-    Returns a decorator for Click commands that adds an option to generate a readme for larger repositories. 
+    Wraps a given function with an '--create_readme_plus' option for generating a readme for larger repositories.
     """
 	return click.option(
 		'--create_readme_plus',
@@ -36,7 +36,7 @@ def create_readme_plus(func: Callable) -> Callable:
 
 def create_tests(func: Callable) -> Callable:
 	"""
-    Creates unit tests for code files. Enables a flag to generate the tests when the function is called.
+    A decorator that adds an argument to a command line function enabling a flag for generating unit tests for each code file.
     """
 	return click.option(
 		'--create_tests',
@@ -47,7 +47,7 @@ def create_tests(func: Callable) -> Callable:
 
 def create_docstring(func: Callable) -> Callable:
 	"""
-    Add the ability to create GPT generated docstring for functions. This is useful for quickly generating basic docstrings for functions
+    Create docstrings for each function using GPT.
     """
 	return click.option(
 		'--create_docstring',

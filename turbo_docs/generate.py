@@ -8,7 +8,7 @@ from turbo_docs.utils import directory, openai_api, cli_options
 
 def run_create_readme(text):
 	"""
-    Create a formatted and user-friendly README.md file using OpenAI API.
+    Runs a create_readme operation with the given input string, writes the formatted and user-friendly output to README.md. Obstacles are handled by graceful error raising.
     """
 	readme = "README.md"
 	prompt = f"Create a formatted & user-friendly readme.md from the following:\n\n{text}"
@@ -22,10 +22,9 @@ def run_create_readme(text):
 
 
 
-
 def run_create_readme_plus(files):
 	"""
-    Create and generate a README.md summarizing code snippets from various files. The README.md will contain each file's summary with the respective file's name at the start of the summary. It will also maintain key logic from the respective code snippets.
+    Runs the create_readme_plus function which generates a README file from source code which summarizes the key logic of the code. Calls the openai_api to generate completion and then calls run_create_readme() to generate the README file.
     """
 	responses = {}
 	for file_path, file_content in files.items():
@@ -41,8 +40,7 @@ def run_create_readme_plus(files):
 
 def run_create_tests(test_file_path, file_content):
 	"""
-    Create unit tests from a given file using OpenAI's GPT-3 API. 
-    This function generates unit tests for the existing code in a given file, prompting the user for code content and writing the generated output to a specified path. 
+    Runs a create_tests task for a given code file. This task calls the openai API to generate unit tests for the given code and writes the results to a test file.
     """
 	print(f"(--create_tests) Generating unit tests for {test_file_path}")
 	prompt = f"Generate unit tests for the following code:\n{file_content}"
@@ -53,8 +51,9 @@ def run_create_tests(test_file_path, file_content):
 
 def run_create_tests_helper(files):
 	"""
-    Helper function for creating uni tests for source files.
-    Makes sure a valid size file and file format exist, and then prompts the user to confirm the creation of tests. If user confirms, runs run_create_tests function.
+    Create unit tests for a specified list of files.
+    The tests will be created in the "tests" directory if it does not already exist.
+    The file name for the test is in the format test_<filename>. The user will be prompted to create the test files if size and extension are valid. 
     """
 	tests_dir = "tests"
 	Path(tests_dir).mkdir(exist_ok=True)
@@ -69,22 +68,27 @@ def run_create_tests_helper(files):
 				run_create_tests(test_file_path, file_content)
 
 
-def is_valid_docstring(s):
+def clean_up_triple_quotes(s):
 	"""
-    Checks if a given string is a valid docstring
+    Validate the given docstring so that the output inside the docstring is valid syntax.
     """
-	print(s)
-	if not s.startswith('"""') or not s.endswith('"""'):
-		return False
-	return True
+	if not s.startswith('"""'):
+		while s.startswith('"'):
+			s = s[1:]
+		return clean_up_triple_quotes('"""' + s[1:])
+	if not s.endswith('"""'):
+		while s.endswith('"'):
+			s = s[:-1]
+		return clean_up_triple_quotes(s[:-1] + '"""')
+	if '"""' in s[3:-3]:
+		s_edit = s[3:-3].replace('"""', '\\"\\"\\"')
+		return clean_up_triple_quotes(f'"""{s_edit}"""')
+	return s
 
 def format_docstring(s):
 	"""
-    Format the given docstring so it meets the PEP 8 guidelines and raise a ValueError if the string is not valid.
+    Formats a provided docstring string to make it compliant to PEP 8 standards by adding '\"\"\"' to the beginning and end of the string and eliminating additional line breaks.
     """
-	if not is_valid_docstring(s):
-		raise ValueError("Invalid docstring format")
-	
 	if not s.startswith('"""\n'):
 		s = f'"""\n{s[3:]}'
 
@@ -98,8 +102,7 @@ def format_docstring(s):
 
 def run_create_docstring(files):
 	"""
-    Create a professional docstring for a python function
-    This function will generate a professional docstring for a python function from given arguments and then write it back into the file. 
+    Run create docstring to create proper docstrings for functions in a files dict.
     """
 	for file_path, content in files.items():
 		if os.stat(file_path).st_size and file_path.split(".")[1]:
@@ -115,7 +118,7 @@ def run_create_docstring(files):
 
 				prompt = f'Generate a professional docstring for the following Python function. Do not include argurments and returns.\n\n{func.dumps()}'
 				docstring = openai_api.gpt_completion_wrapper(prompt)
-				docstring_formatted = format_docstring(docstring)
+				docstring_formatted = format_docstring(clean_up_triple_quotes(docstring))
 				func.value.insert(0, docstring_formatted)
 
 			# Write the modified code back to the file
@@ -131,7 +134,10 @@ def run_create_docstring(files):
 @cli_options.create_docstring
 def driver(copy: bool, create_readme: bool, create_readme_plus: bool, create_tests: bool, create_docstring: bool) -> None:
 	"""
-    A command line utility allowing for generation of README.md, tests.md, and docstrings for functions in a project directory
+    Generates various necessary assets for a project.
+    The assets generated depend on the flags chosen when calling this function. 
+    The assets generated include documents such as pyperclip, README.md, and tests; as 
+    well as docstrings for each function in the project. 
     """
 	files = directory.get_files()
 	dir_text = "\n\n".join([f"{name}:\n\n{content}" for name, content in files.items()])
@@ -156,15 +162,6 @@ def driver(copy: bool, create_readme: bool, create_readme_plus: bool, create_tes
 	# Generate docstring for each function if specified
 	if create_docstring:
 		run_create_docstring(files)
-
-
-
-
-
-
-
-
-
 
 
 if __name__ == '__main__':

@@ -5,7 +5,7 @@ from typing import List, Dict
 
 def ignored_files_init() -> List[str]:
 	"""
-    Initialize a list of files to ignore during operations. Filenames starting with "." will be added to the list.
+    Initialize a list with files that have to be ignored. Files starting with "." will automaticly be included to the list.
     """
 	ignored_files = ["README.md", "tests"]
 	for file in os.listdir():
@@ -15,7 +15,7 @@ def ignored_files_init() -> List[str]:
 
 def read_gitignore() -> List[str]:
 	"""
-    Reads and parses the .gitignore file, returning a list of files to ignore. Raises a ValueError if the .gitignore file is not found.
+    Reads the .gitignore file and returns a list of the excluded files for documentation generation. Raises a ValueError if the .gitignore file is not found.
     """
 	ignore_files = ignored_files_init()
 	try:
@@ -28,7 +28,7 @@ def read_gitignore() -> List[str]:
 
 def ignore_filepath(filepath: str, ignore_files: List[str]) -> bool:
 	"""
-    Checks whether a filepath contains any part listed in the ignore_files list, and returns a boolean indicating the result of the check.
+    Checks if any parts of a filepath are contained in a list of items to ignore.
     """
 	for part in Path(filepath).parts:
 		if part in ignore_files:
@@ -37,7 +37,7 @@ def ignore_filepath(filepath: str, ignore_files: List[str]) -> bool:
 
 def get_files() -> Dict:
 	"""
-    Retrieve all files in the current directory, excluding those listed in the .gitignore file, and returns them in a dictionary. The field for each file contains the file content with indendation changed to tab spacing.
+    Retrieve the text content from all files in the current directory and its subdirectories and return them in a dictionary.
     """
 	files_dict = {}
 	ignore_files = read_gitignore()
