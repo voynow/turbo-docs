@@ -1,53 +1,54 @@
 
+# Turbo Docs
 
-## Turbo-Docs
-Turbo-Docs is a package for Python creating formatted, user-friendly README.md files and unit tests. 
+Turbo Docs is a set of command-line utilities made for automating document creation and data entry tasks. Its utilities make it easy to create, package, and distribute Python packages for use by others. The code utilizes Python libraries like requests, openai, click, pyperclip, and redbaron in order to automate data entry tasks, formatting docstrings and wrapping text to 80 characters. The CLI application can generate a README summarizing the code, unit tests and docstrings for Python functions.
 
-### Installation
-Using pip:
-```bash
-pip install turbo_docs
-```
+## Requirements
 
-Using setup.py
-```bash
-python setup.py install
-```
-
-### Usage
-Using the command line: 
-```bash
-turbo_docs [OPTION]
-```
-
-- Create a Formatted and User-Friendly Readme.md file:
-
-```bash
-turbo_docs --create_readme
-```
-
-- Create a Formatted and User-Friendly Readme.md file for large repos:
-
-```bash
-turbo_docs --create_readme_plus
-```
-
-- Create Unit Tests for each code file: 
-
-```bash
-turbo_docs --create_tests
-```
-
-### Requirements
-- Python 3.8+
-- Setuptools
-- Wheel
+- Setuptools library
+- Wheel library
 - Twine
-- OpenAI
 - Requests
+- OpenAI
 - Click
-- Pyperclip
+- pyperclip
+- Redbaron
 
-### Developed by
+## Features
 
-This code is developed by [Jamie Voynow](https://github.com/voynow), a software developer with an aim to make the process of creating and managing documentation easier. For more information, visit the [GitHub repository](https://github.com/voynow/turbo-docs).
+- Automate data entry tasks via copy to clipboard
+- Generate a README summarizing the code
+- Generate unit tests
+- Generate concise docstrings for functions
+
+## Usage
+
+Generate a README.md summarizing your code: 
+
+```
+python generate.py --create_readme
+```
+
+Generate a README.md for larger repositories:
+
+```
+python generate.py --create_readme_plus
+```
+
+Generate unit tests for the code files (work in progress):
+
+```
+python generate.py --create_tests
+```
+
+Generate and insert docstrings for each Python function:
+
+```
+python generate.py --create_docstring
+```
+
+Copy all code files in the directory to the clipboard:
+
+``` 
+python generate.py --copy
+```

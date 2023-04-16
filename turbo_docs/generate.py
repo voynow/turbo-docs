@@ -3,12 +3,14 @@ import os
 from pathlib import Path
 import pyperclip
 from redbaron import RedBaron
+import textwrap
 from turbo_docs.utils import directory, openai_api, cli_options
 
 
 def run_create_readme(text):
 	"""
-    Runs a create_readme operation with the given input string, writes the formatted and user-friendly output to README.md. Obstacles are handled by graceful error raising.
+    Generates a README.md file based on a provided text using the OpenAI API and
+    raises a PermissionError if the file is blocked by the device.
     """
 	readme = "README.md"
 	prompt = f"Create a formatted & user-friendly readme.md from the following:\n\n{text}"
@@ -24,7 +26,8 @@ def run_create_readme(text):
 
 def run_create_readme_plus(files):
 	"""
-    Runs the create_readme_plus function which generates a README file from source code which summarizes the key logic of the code. Calls the openai_api to generate completion and then calls run_create_readme() to generate the README file.
+    Creates a README for provided files by computing summaries of the code, and then
+    running create_readme to generate a README.md file.
     """
 	responses = {}
 	for file_path, file_content in files.items():
@@ -40,7 +43,7 @@ def run_create_readme_plus(files):
 
 def run_create_tests(test_file_path, file_content):
 	"""
-    Runs a create_tests task for a given code file. This task calls the openai API to generate unit tests for the given code and writes the results to a test file.
+    Run create tests to generate unit tests for a specified file path.
     """
 	print(f"(--create_tests) Generating unit tests for {test_file_path}")
 	prompt = f"Generate unit tests for the following code:\n{file_content}"
@@ -51,9 +54,8 @@ def run_create_tests(test_file_path, file_content):
 
 def run_create_tests_helper(files):
 	"""
-    Create unit tests for a specified list of files.
-    The tests will be created in the "tests" directory if it does not already exist.
-    The file name for the test is in the format test_<filename>. The user will be prompted to create the test files if size and extension are valid. 
+    Create test for each file in the "files" dictionary, prompting the user if
+    they would like to create unit tests for the file.
     """
 	tests_dir = "tests"
 	Path(tests_dir).mkdir(exist_ok=True)
@@ -68,62 +70,66 @@ def run_create_tests_helper(files):
 				run_create_tests(test_file_path, file_content)
 
 
-def clean_up_triple_quotes(s):
+def wrap_text(text):
 	"""
-    Validate the given docstring so that the output inside the docstring is valid syntax.
+    Wrap the given text to 80 characters.
     """
-	if not s.startswith('"""'):
-		while s.startswith('"'):
-			s = s[1:]
-		return clean_up_triple_quotes('"""' + s[1:])
-	if not s.endswith('"""'):
-		while s.endswith('"'):
-			s = s[:-1]
-		return clean_up_triple_quotes(s[:-1] + '"""')
-	if '"""' in s[3:-3]:
-		s_edit = s[3:-3].replace('"""', '\\"\\"\\"')
-		return clean_up_triple_quotes(f'"""{s_edit}"""')
-	return s
+	line_length = 80
+
+	# wrap text to 80 chars
+	text = " ".join(text.split("\n"))
+	wrapped_text = '\n'.join(textwrap.wrap(text, line_length, break_long_words=False))
+
+	return wrapped_text
+
 
 def format_docstring(s):
 	"""
-    Formats a provided docstring string to make it compliant to PEP 8 standards by adding '\"\"\"' to the beginning and end of the string and eliminating additional line breaks.
+    Format a docstring to fit standard rules.
     """
-	if not s.startswith('"""\n'):
-		s = f'"""\n{s[3:]}'
+	if s.startswith('"') or s.startswith('\n'):
+		return format_docstring(s[1:])
 
-	if not s.endswith('\n"""'):
-		s = f'{s[:-3]}\n"""'
-	
-	while "\n\n" in s:
-		s = s.replace("\n\n", "\n")
-	return s
+	if s.endswith('"') or s.endswith('\n'):
+		return format_docstring(s[:-1])
+
+	if "\n\n" in s:
+		return format_docstring(s.replace("\n\n", "\n"))
+
+	if '"""' in s:
+		return format_docstring(s.replace('"""', '\\"\\"\\"'))
+
+	wrapped_text = wrap_text(s.strip())
+	return  f'"""\n{wrapped_text}\n"""'
+
 
 
 def run_create_docstring(files):
 	"""
-    Run create docstring to create proper docstrings for functions in a files dict.
+    Generate a docstring for a function in a Python file.
     """
 	for file_path, content in files.items():
-		if os.stat(file_path).st_size and file_path.split(".")[1]:
+		if file_path.split(".")[1]:
 
 			red = RedBaron(content)
-			for func in red.find_all("def"):
-				func_name = func.name
-				print(f"(--create_docstring) Generating docstring for {file_path}.{func_name}")
+			functions = red.find_all("def")
+			if functions:
+				for func in functions:
+					func_name = func.name
+					print(f"(--create_docstring) Generating docstring for {file_path}.{func_name}")
 
-				# Remove existing docstring before creating the prompt
-				if func.value[0].type == "string":
-					func.value.pop(0)
+					# Remove existing docstring before creating the prompt
+					if func.value[0].type == "string":
+						func.value.pop(0)
 
-				prompt = f'Generate a professional docstring for the following Python function. Do not include argurments and returns.\n\n{func.dumps()}'
-				docstring = openai_api.gpt_completion_wrapper(prompt)
-				docstring_formatted = format_docstring(clean_up_triple_quotes(docstring))
-				func.value.insert(0, docstring_formatted)
+					prompt = f'Generate a concise docstring for the following Python function. Do not include argurments and returns.\n\n{func.dumps()}'
+					docstring = openai_api.gpt_completion_wrapper(prompt)
+					docstring_formatted = format_docstring(docstring)
+					func.value.insert(0, docstring_formatted)
 
-			# Write the modified code back to the file
-			with open(file_path, "w") as f:
-				f.write(red.dumps())
+				# Write the modified code back to the file
+				with open(file_path, "w") as f:
+					f.write(red.dumps())
 
 
 @click.command()
@@ -134,10 +140,9 @@ def run_create_docstring(files):
 @cli_options.create_docstring
 def driver(copy: bool, create_readme: bool, create_readme_plus: bool, create_tests: bool, create_docstring: bool) -> None:
 	"""
-    Generates various necessary assets for a project.
-    The assets generated depend on the flags chosen when calling this function. 
-    The assets generated include documents such as pyperclip, README.md, and tests; as 
-    well as docstrings for each function in the project. 
+    Processes the specified command line arguments and calls functions 
+	accordingly, such as copying directory text to the clipboard, 
+	generating README.md files, generating tests, or generating docstring.
     """
 	files = directory.get_files()
 	dir_text = "\n\n".join([f"{name}:\n\n{content}" for name, content in files.items()])
