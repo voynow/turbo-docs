@@ -128,8 +128,16 @@ def run_create_docstring(files):
 					func.value.insert(0, docstring_formatted)
 
 				# Write the modified code back to the file
-				with open(file_path, "w") as f:
-					f.write(red.dumps())
+				try:
+					with open(file_path, "w") as f:
+						f.write(red.dumps())
+				except PermissionError:
+					print(f"Permission denied for file: {file_path}.")
+					print("To resolve this issue, please try the following steps:")
+					print("1. Close the file if it is open in any text editor or IDE.")
+					print("2. Check the file permissions and ensure your user account has write access.")
+					print("3. Run the command prompt or terminal with administrator privileges.")		
+					break		
 
 
 @click.command()
