@@ -104,7 +104,6 @@ def format_docstring(s):
 	return  f'"""\n{wrapped_text}\n"""'
 
 
-
 def run_create_docstring(files):
 	"""
     Generate a docstring for a function in a Python file.
@@ -132,32 +131,36 @@ def run_create_docstring(files):
 				with open(file_path, "w") as f:
 					f.write(red.dumps())
 
+
 def run_generate_commit():
-    """
-    Generate a commit message and execute the commit based on the changed files.
-    """
-    repo = Repo()
-    repo.git.add(".")
+	"""
+	Generate a commit message and execute the commit based on the changed files.
+	"""
+	repo = Repo()
+	repo.git.add(".")
 
-    # Get the differences between the working tree and the latest commit
-    diff = repo.git.diff("HEAD")
+	# Get the differences between the working tree and the latest commit
+	diff = repo.git.diff("HEAD")
 
-    # Check if there are any changes
-    if not diff.strip():
-        print("(--generate_commit) No changes detected, commit aborted.")
-        return
+	# Check if there are any changes
+	if not diff.strip():
+		print("(--generate_commit) No changes detected, commit aborted.")
+		return
 
     # Generate commit message
-    prompt = f"Generate a concise, one line description of the following changes:\n\n{diff}"
-    commit_message = openai_api.gpt_completion_wrapper(prompt)
-    print(commit_message)
+	while True:
+		prompt = f"Generate a concise, one line description of the following changes:\n\n{diff}"
+		commit_message = openai_api.gpt_completion_wrapper(prompt)
+		resp = input(f"Here is your commit message: {commit_message}\nWould you like to commit? (Y/n)")
+		if resp != "n" or resp != "N":
+			break
 
     # Commit changes
-    try:
-        repo.git.commit("-m", commit_message)
-        print(f"(--generate_commit) Commit executed with message: {commit_message}")
-    except Exception as e:
-        print(f"(--generate_commit) Failed to execute the commit. Error: {e}")
+	try:
+		repo.git.commit("-m", commit_message)
+		print(f"(--generate_commit) Commit executed with message: {commit_message}")
+	except Exception as e:
+		print(f"(--generate_commit) Failed to execute the commit. Error: {e}")
 
 
 @click.command()
