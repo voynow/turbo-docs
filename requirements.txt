@@ -3,3 +3,4 @@ openai
 click
 pyperclip
 redbaron
+gitpython

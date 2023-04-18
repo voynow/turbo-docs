@@ -1,4 +1,5 @@
 import click
+from git import Repo
 import os
 from pathlib import Path
 import pyperclip
@@ -131,6 +132,33 @@ def run_create_docstring(files):
 				with open(file_path, "w") as f:
 					f.write(red.dumps())
 
+def run_generate_commit():
+    """
+    Generate a commit message and execute the commit based on the changed files.
+    """
+    repo = Repo()
+    repo.git.add(".")
+
+    # Get the differences between the working tree and the latest commit
+    diff = repo.git.diff("HEAD")
+
+    # Check if there are any changes
+    if not diff.strip():
+        print("(--generate_commit) No changes detected, commit aborted.")
+        return
+
+    # Generate commit message
+    prompt = f"Generate a concise, one line description of the following changes:\n\n{diff}"
+    commit_message = openai_api.gpt_completion_wrapper(prompt)
+    print(commit_message)
+
+    # Commit changes
+    try:
+        repo.git.commit("-m", commit_message)
+        print(f"(--generate_commit) Commit executed with message: {commit_message}")
+    except Exception as e:
+        print(f"(--generate_commit) Failed to execute the commit. Error: {e}")
+
 
 @click.command()
 @cli_options.copy
@@ -138,7 +166,15 @@ def run_create_docstring(files):
 @cli_options.create_readme_plus
 @cli_options.create_tests
 @cli_options.create_docstring
-def driver(copy: bool, create_readme: bool, create_readme_plus: bool, create_tests: bool, create_docstring: bool) -> None:
+@cli_options.generate_commit
+def driver(
+	copy: bool, 
+	create_readme: bool, 
+	create_readme_plus: bool, 
+	create_tests: bool, 
+	create_docstring: bool, 
+	generate_commit: bool
+) -> None:
 	"""
     Processes the specified command line arguments and calls functions 
 	accordingly, such as copying directory text to the clipboard, 
@@ -167,6 +203,10 @@ def driver(copy: bool, create_readme: bool, create_readme_plus: bool, create_tes
 	# Generate docstring for each function if specified
 	if create_docstring:
 		run_create_docstring(files)
+
+	# Generate docstring for each function if specified
+	if generate_commit:
+		run_generate_commit()
 
 
 if __name__ == '__main__':
