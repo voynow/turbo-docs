@@ -152,7 +152,7 @@ def run_generate_commit():
 		prompt = f"Generate a concise, one line description of the following changes:\n\n{diff}"
 		commit_message = openai_api.gpt_completion_wrapper(prompt)
 		resp = input(f"Here is your commit message: {commit_message}\nWould you like to commit? (Y/n)")
-		if resp != "n" or resp != "N":
+		if resp != "n" and resp != "N":
 			break
 
     # Commit changes
