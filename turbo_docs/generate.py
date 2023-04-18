@@ -132,7 +132,7 @@ def run_create_docstring(files):
 					f.write(red.dumps())
 
 
-def run_generate_commit():
+def run_create_commit():
 	"""
 	Generate a commit message and execute the commit based on the changed files.
 	"""
@@ -149,7 +149,7 @@ def run_generate_commit():
 
     # Generate commit message
 	while True:
-		prompt = f"Generate a concise, one line description of the following changes:\n\n{diff}"
+		prompt = f"Generate a very concise, one line description of the following changes:\n\n{diff}"
 		commit_message = openai_api.gpt_completion_wrapper(prompt)
 		resp = input(f"Here is your commit message: {commit_message}\nWould you like to commit? (Y/n)")
 		if resp != "n" and resp != "N":
@@ -169,14 +169,14 @@ def run_generate_commit():
 @cli_options.create_readme_plus
 @cli_options.create_tests
 @cli_options.create_docstring
-@cli_options.generate_commit
+@cli_options.create_commit
 def driver(
 	copy: bool, 
 	create_readme: bool, 
 	create_readme_plus: bool, 
 	create_tests: bool, 
 	create_docstring: bool, 
-	generate_commit: bool
+	create_commit: bool
 ) -> None:
 	"""
     Processes the specified command line arguments and calls functions 
@@ -208,8 +208,8 @@ def driver(
 		run_create_docstring(files)
 
 	# Generate docstring for each function if specified
-	if generate_commit:
-		run_generate_commit()
+	if create_commit:
+		run_create_commit()
 
 
 if __name__ == '__main__':
