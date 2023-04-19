@@ -56,3 +56,14 @@ def create_docstring(func: Callable) -> Callable:
 		is_flag=True,
 		help='Generate and insert docstrings for each function using GPT'
 	)(func)
+
+def create_commit(func: Callable) -> Callable:
+	"""
+	Create a command line flag to generate a commit message and execute the commit.
+	"""
+	return click.option(
+		'--create_commit',
+		default=False,
+		is_flag=True,
+		help='Generate a commit message and execute the commit'
+	)(func)

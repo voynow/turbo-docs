@@ -1,4 +1,5 @@
 import click
+from git import Repo
 import os
 from pathlib import Path
 import pyperclip
@@ -103,7 +104,6 @@ def format_docstring(s):
 	return  f'"""\n{wrapped_text}\n"""'
 
 
-
 def run_create_docstring(files):
 	"""
     Generate a docstring for a function in a Python file.
@@ -132,13 +132,52 @@ def run_create_docstring(files):
 					f.write(red.dumps())
 
 
+def run_create_commit():
+	"""
+	Generate a commit message and execute the commit based on the changed files.
+	"""
+	repo = Repo()
+	repo.git.add(".")
+
+	# Get the differences between the working tree and the latest commit
+	diff = repo.git.diff("HEAD")
+
+	# Check if there are any changes
+	if not diff.strip():
+		print("(--generate_commit) No changes detected, commit aborted.")
+		return
+
+    # Generate commit message
+	while True:
+		prompt = f"Generate a very concise, one line description of the following changes:\n\n{diff}"
+		commit_message = openai_api.gpt_completion_wrapper(prompt)
+		resp = input(f"Here is your commit message: {commit_message}\nWould you like to commit? (Y/n)")
+		if resp != "n" and resp != "N":
+			break
+
+    # Commit changes
+	try:
+		repo.git.commit("-m", commit_message)
+		print(f"(--generate_commit) Commit executed with message: {commit_message}")
+	except Exception as e:
+		print(f"(--generate_commit) Failed to execute the commit. Error: {e}")
+
+
 @click.command()
 @cli_options.copy
 @cli_options.create_readme
 @cli_options.create_readme_plus
 @cli_options.create_tests
 @cli_options.create_docstring
-def driver(copy: bool, create_readme: bool, create_readme_plus: bool, create_tests: bool, create_docstring: bool) -> None:
+@cli_options.create_commit
+def driver(
+	copy: bool, 
+	create_readme: bool, 
+	create_readme_plus: bool, 
+	create_tests: bool, 
+	create_docstring: bool, 
+	create_commit: bool
+) -> None:
 	"""
     Processes the specified command line arguments and calls functions 
 	accordingly, such as copying directory text to the clipboard, 
@@ -167,6 +206,10 @@ def driver(copy: bool, create_readme: bool, create_readme_plus: bool, create_tes
 	# Generate docstring for each function if specified
 	if create_docstring:
 		run_create_docstring(files)
+
+	# Generate docstring for each function if specified
+	if create_commit:
+		run_create_commit()
 
 
 if __name__ == '__main__':

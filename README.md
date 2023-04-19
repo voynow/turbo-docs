@@ -52,3 +52,9 @@ Copy all code files in the directory to the clipboard:
 ``` 
 python generate.py --copy
 ```
+
+Copy all code files in the directory to the clipboard:
+
+``` 
+python generate.py --copy
+```
