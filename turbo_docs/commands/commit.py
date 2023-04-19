@@ -23,7 +23,6 @@ def get_commit_prompt(repo, files):
 
 	prompt = f"Here is some relevant code:\n\n{context}\n\n"
 	prompt += f"Generate a very concise, paraphrased, one-liner for the following changes:\n\n{diff}\n\n"
-	prompt += "Don't use the word commit or answer"
 	return prompt
 
 
@@ -42,6 +41,8 @@ def commit(files):
 	resp = "n"
 	while resp == "n" or resp == "N":
 		commit_message = openai_api.gpt_completion_wrapper(prompt)
+		if ":" in commit_message:
+			commit_message = commit_message.split(":")[1]
 		resp = input(f"Here is your commit message: {commit_message}\nWould you like to commit? (Y/n)")
 
     # Commit changes
