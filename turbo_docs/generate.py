@@ -132,28 +132,45 @@ def run_create_docstring(files):
 					f.write(red.dumps())
 
 
-def run_create_commit():
+def get_commit_prompt(repo, files):
 	"""
-	Generate a commit message and execute the commit based on the changed files.
+	Generate a prompt for the user to generate a commit message.
 	"""
-	repo = Repo()
-	repo.git.add(".")
-
-	# Get the differences between the working tree and the latest commit
 	diff = repo.git.diff("HEAD")
 
 	# Check if there are any changes
 	if not diff.strip():
 		print("(--generate_commit) No changes detected, commit aborted.")
+		return None
+
+	diff_files_string = repo.git.diff("--name-status", "HEAD")
+	diff_files = [file.split("\t")[1].replace("/", "\\") for file in diff_files_string.split("\n")]
+
+	diff_files = {file: files[file] for file in diff_files}
+	context = "\n\n".join([f"{name}:\n\n{content}" for name, content in diff_files.items()])
+
+	prompt = f"Here is some relevant code:\n\n{context}\n\n"
+	prompt += f"Generate a very concise, one line description of the following changes:\n\n{diff}"
+	return prompt
+
+
+def run_create_commit(files):
+	"""
+	Generate a commit message and execute the commit based on the changed files.
+	"""
+	repo = Repo()
+	repo.git.add(".")
+	
+	# Generate prompt for commit message
+	prompt = get_commit_prompt(repo, files)
+	if prompt is None:
 		return
 
-    # Generate commit message
-	while True:
-		prompt = f"Generate a very concise, one line description of the following changes:\n\n{diff}"
+    # Generate commit message with user confirmation
+	resp = "n"
+	while resp == "n" or resp == "N":
 		commit_message = openai_api.gpt_completion_wrapper(prompt)
 		resp = input(f"Here is your commit message: {commit_message}\nWould you like to commit? (Y/n)")
-		if resp != "n" and resp != "N":
-			break
 
     # Commit changes
 	try:
@@ -209,7 +226,7 @@ def driver(
 
 	# Generate docstring for each function if specified
 	if create_commit:
-		run_create_commit()
+		run_create_commit(files)
 
 
 if __name__ == '__main__':
