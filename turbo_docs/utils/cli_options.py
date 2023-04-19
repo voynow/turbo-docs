@@ -12,57 +12,57 @@ def copy(func: Callable) -> Callable:
 		help='Copy the directory text to clipboard'
 	)(func)
 
-def create_readme(func: Callable) -> Callable:
+def readme(func: Callable) -> Callable:
 	"""
-    Add a --create_readme flag for a function, which when set to true, will generate
+    Add a --readme flag for a function, which when set to true, will generate
     a README.md file
     """
 	return click.option(
-		'--create_readme',
+		'--readme',
 		default=False,
 		is_flag=True,
 		help='Generate README.md file'
 	)(func)
 
-def create_readme_plus(func: Callable) -> Callable:
+def readme_large_repo(func: Callable) -> Callable:
 	"""
     Wrap a function to provide flag to generate readme for larger repositories.
     """
 	return click.option(
-		'--create_readme_plus',
+		'--readme_large_repo',
 		default=False,
 		is_flag=True,
 		help='Generate readme for larger repositories'
 	)(func)
 
-def create_tests(func: Callable) -> Callable:
+def unit_tests(func: Callable) -> Callable:
 	"""
     Create a command line flag to generate unit tests for each code file.
     """
 	return click.option(
-		'--create_tests',
+		'--unit_tests',
 		default=False,
 		is_flag=True,
 		help='Generate unit tests for each code file'
 	)(func)
 
-def create_docstring(func: Callable) -> Callable:
+def docstring(func: Callable) -> Callable:
 	"""
-    Generate and insert docstrings for each function using GPT.
+    Generate and insert docstrings for each function.
     """
 	return click.option(
-		'--create_docstring',
+		'--docstring',
 		default=False,
 		is_flag=True,
-		help='Generate and insert docstrings for each function using GPT'
+		help='Generate and insert docstrings for each function'
 	)(func)
 
-def create_commit(func: Callable) -> Callable:
+def commit(func: Callable) -> Callable:
 	"""
 	Create a command line flag to generate a commit message and execute the commit.
 	"""
 	return click.option(
-		'--create_commit',
+		'--commit',
 		default=False,
 		is_flag=True,
 		help='Generate a commit message and execute the commit'
