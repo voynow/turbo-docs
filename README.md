@@ -1,60 +1,42 @@
-
 # Turbo Docs
 
-Turbo Docs is a set of command-line utilities made for automating document creation and data entry tasks. Its utilities make it easy to create, package, and distribute Python packages for use by others. The code utilizes Python libraries like requests, openai, click, pyperclip, and redbaron in order to automate data entry tasks, formatting docstrings and wrapping text to 80 characters. The CLI application can generate a README summarizing the code, unit tests and docstrings for Python functions.
+Turbo Docs is a command line utility designed to efficiently generate and process files for Python projects. It provides a suite of commands that allow users to generate README.md files, generate tests, generate docstrings, copy the directory text to the clipboard, generate a commit message, and execute commits. 
 
 ## Requirements
 
-- Setuptools library
-- Wheel library
-- Twine
-- Requests
-- OpenAI
-- Click
-- pyperclip
-- Redbaron
-
-## Features
-
-- Automate data entry tasks via copy to clipboard
-- Generate a README summarizing the code
-- Generate unit tests
-- Generate concise docstrings for functions
+Turbo Docs requires the following libraries to function properly:
+- [setuptools](https://pypi.org/project/setuptools/): Used to create Python packages
+- [wheel](https://pypi.org/project/wheel/): Used to build packages in the wheel format (supports both Python 2 and Python 3)
+- [twine](https://pypi.org/project/twine/): Used to safely upload packages to the Python Package Index
+- [Requests](https://pypi.org/project/requests/): Used to make HTTP requests
+- [OpenAI](https://pypi.org/project/openai/): Used to build intelligent products using machine learning
+- [Click](https://pypi.org/project/click/): Used to create command line interfaces 
+- [Pyperclip](https://pypi.org/project/pyperclip/): Used to copy text from and to the clipboard 
+- [RedBaron](https://pypi.org/project/redbaron/): Used to programmatically manipulate Python source code
+- [GitPython](https://pypi.org/project/gitpython/): Used to interact with git repositories from Python
 
 ## Usage
 
-Generate a README.md summarizing your code: 
+Using Turbo Docs is as simple as running the `turbo-docs` command from the terminal.
 
-```
-python generate.py --create_readme
-```
+The command accepts the following options:
 
-Generate a README.md for larger repositories:
+- `--readme`: Generates a `README.md` file 
+- `--copy`: Copies the directory text to the clipboard
+- `--readme-large-repo`: Generates a `README.md` file for a large repository
+- `--unit-tests`: Generates unit tests for code files 
+- `--docstring`: Generates and inserts docstrings for each function 
+- `--commit`: Generates a commit message and executes the commit 
 
-```
-python generate.py --create_readme_plus
-```
+Example:  
+`turbo-docs --docstring`
 
-Generate unit tests for the code files (work in progress):
+If you have any issues when running the command, please open an [issue](https://github.com/turbo-docs/issues).
 
-```
-python generate.py --create_tests
-```
+## Contributing
+Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
-Generate and insert docstrings for each Python function:
+Please make sure to update tests as appropriate.
 
-```
-python generate.py --create_docstring
-```
-
-Copy all code files in the directory to the clipboard:
-
-``` 
-python generate.py --copy
-```
-
-Copy all code files in the directory to the clipboard:
-
-``` 
-python generate.py --copy
-```
+## License
+[MIT](https://choosealicense.com/licenses/mit/)
