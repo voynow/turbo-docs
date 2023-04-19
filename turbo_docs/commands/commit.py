@@ -17,13 +17,13 @@ def get_commit_prompt(repo, files):
 
 	diff_files_string = repo.git.diff("--name-status",  "--cached", "HEAD")
 	diff_files = [file.split("\t")[1].replace("/", "\\") for file in diff_files_string.split("\n")]
-	print(diff_files)
 
 	diff_files = {file: files[file] for file in diff_files}
 	context = "\n\n".join([f"{name}:\n\n{content}" for name, content in diff_files.items()])
 
 	prompt = f"Here is some relevant code:\n\n{context}\n\n"
-	prompt += f"Generate a very concise, one line description of the following changes:\n\n{diff}"
+	prompt += f"Generate a very concise, paraphrased, one-liner for the following changes:\n\n{diff}\n\n"
+	prompt += "Don't use the word commit or answer"
 	return prompt
 
 
