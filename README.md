@@ -1,21 +1,48 @@
-# Turbo-Docs
+# README
 
-Turbo-Docs is a Python package for automatically generating formatted and user-friendly READMEs, docstrings, and unit tests from your codebase. It utilizes OpenAI's language model to generate the documentation and can commit changes to your repository with a generated commit message.
+Welcome to Turbo Docs, an automated project documentation generator!
+
+This project provides a set of libraries and utilities to generate user-friendly project documentation. With Turbo Docs you can quickly generate project README files, docstrings and unit tests which saved you lots of time and effort.
 
 ## Requirements
-* OpenAI
-* Click
-* Pyperclip
-* RedBaron
-* GitPython
+
+The following packages are required to use Turbo Docs:
+- setuptools
+- wheel
+- twine
+- requests
+- openai
+- click
+- pyperclip
+- redbaron
+- gitpython
+
+## Installation
+
+To install Turbo Docs, please run the following command:
+
+```
+pip install turbo_docs
+```
 
 ## Usage
-`pip install turbo_docs`
 
-Turbo-Docs is designed to make it easy to generate documentation and tests using the following commands:
-* `turbo_docs --copy`  Copies the directory to the clipboard, useful for working with chatGPT
-* `turbo_docs --readme`  Creates a README.md
-* `turbo_docs --readme_large_repo`  Generates README.md for large repos with more info
-* `turbo_docs --docstring`  Generates docstring for files
-* `turbo_docs --unit_teste`  (WORK IN PROGRESS) Generates unit tests for files
-* `turbo_docs --commit`  (WORK IN PROGRESS) Utilizes OpenAI to generate commit message & commits changes
+To generate project documentation with Turbo Docs, use the `driver` script to call the various subcommands.
+
+```
+python turbo_docs\generate.py --copy --readme --readme_large_repo --unit_tests --docstring --commit
+```
+
+The `driver` command allows you to pass multiple flags to generate the desired project documentation. The flags for each command are as follows: 
+- `--copy`: Copy the dir text to clipboard
+- `--readme`: Generate a README.md file
+- `--readme_large_repo`: Generate readme for larger repos
+- `--unit_tests`: Generate unit tests for each code file
+- `--docstring`: Generate and insert docstrings for each function
+- `--commit`: Generate a commit message and execute the commit
+
+## Contributing
+
+If you would like to contribute to Turbo Docs, please feel free to open a pull request
+
+Or each out to me at voynow99@gmail.com, https://www.linkedin.com/in/voynow/, or https://twitter.com/JamesVoynow!

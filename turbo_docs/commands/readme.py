@@ -4,7 +4,8 @@ from turbo_docs.utils import openai_api
 
 def readme(text):
     """
-    Generate a formatted & user-friendly README.md file utilizing OpenAI API.
+    Generate a formatted & user-friendly README.md using openai API and output it to
+    a README.md file
     """
     readme = "README.md"
     prompt = f"Create a formatted & user-friendly readme.md from the following:\n\n{text}"
@@ -17,9 +18,11 @@ def readme(text):
         print(f"(--readme) Generated README.md")
 
 
+
+
 def readme_large_repo(files):
     """
-    Read and create README from large repo files
+    Generate a README.md for larger repositories
     """
     responses = {}
     for file_path, file_content in files.items():

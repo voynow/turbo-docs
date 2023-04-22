@@ -23,8 +23,8 @@ def driver(
         commit: bool
 ) -> None:
     """
-    Runs the driver function to copy directory text to clipboard, generate
-    README.md, docs.md, unit tests, docstring, and commit.
+    Generates files, such as README, Docstring and Unit Tests, based on the code in 
+    your local directory
     """
     files = directory.get_files()
     dir_text = "\n\n".join(

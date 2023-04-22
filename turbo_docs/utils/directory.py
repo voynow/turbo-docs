@@ -6,7 +6,7 @@ from typing import List, Dict
 
 def ignored_files_init() -> List[str]:
     """
-    Create a list of files to be ignored when searching a directory.
+    Initializes a list of ignored files from current directory.
     """
     ignored_files = ["README.md", "tests", "setup.py"]
     for file in os.listdir():
@@ -17,7 +17,8 @@ def ignored_files_init() -> List[str]:
 
 def read_gitignore() -> List[str]:
     """
-    Reads and returns contents of .gitignore file into a list of strings.
+    Read '.gitignore' file and return a list of files to be excluded from
+    documentation generation.
     """
     ignore_files = ignored_files_init()
     try:
@@ -32,8 +33,7 @@ def read_gitignore() -> List[str]:
 
 def ignore_filepath(filepath: str, ignore_files: List[str]) -> bool:
     """
-    Return True if a given filepath contains any part specified in a list of
-    strings, else return False.
+    Check a file path to see if it should be ignored
     """
     for part in Path(filepath).parts:
         if part in ignore_files:
@@ -43,8 +43,8 @@ def ignore_filepath(filepath: str, ignore_files: List[str]) -> bool:
 
 def get_files() -> Dict:
     """
-    Retrieve the contents of all files in the current directory, excluding those
-    specified in the ignore file.
+    Retrieve and return all files in the working directory, ignoring those specified
+    in the .gitignore file.
     """
     files_dict = {}
     ignore_files = read_gitignore()

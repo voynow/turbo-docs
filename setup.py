@@ -2,13 +2,15 @@ from setuptools import setup, find_packages
 
 setup(
 	name="turbo_docs",
-	version="0.6.4",
+	version="0.7.0",
 	packages=find_packages(),
 	install_requires=[
 		"requests",
 		"openai",
 		"click",
 		"pyperclip",
+		"redbaron",
+		"gitpython",
 	],
 	entry_points={
 		"console_scripts": [
