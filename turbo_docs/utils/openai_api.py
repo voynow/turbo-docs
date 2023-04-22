@@ -4,7 +4,7 @@ import os
 
 def openai_init():
     """
-    Initializes OpenAI API and sets API key.
+    Initialize OpenAI API with API key, prompt user for key if not set
     """
     import openai
     openai.api_key = os.environ.get('OPENAI_API_KEY')
@@ -18,7 +18,7 @@ def openai_init():
 
 def gpt_completion_wrapper(prompt, openai_package=None):
     """
-    Wraps OpenAI's text completion model to generate a result for the given prompt.
+    Wrapper for OpenAI's GPT-3 completions using Text-Davinci-003 engine.
     """
     if not openai_package:
         openai_package = openai_init()
@@ -35,7 +35,7 @@ def gpt_completion_wrapper(prompt, openai_package=None):
 
 def gpt_completion_error_handler(prompt):
     """
-    Wraps OpenAI's text completion model to generate a result for the given prompt.
+    Handle OpenAI API errors for GPT completion requests
     """
     text = None
     openai_package = openai_init()

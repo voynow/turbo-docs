@@ -5,8 +5,7 @@ from turbo_docs.utils import openai_api
 
 def wrap_text(text):
     """
-    Wraps text to appropriate length of 80 characters, with no breaking of long
-    words.
+    Wrap a given string of text to 80 characters
     """
     line_length = 80
 
@@ -20,7 +19,7 @@ def wrap_text(text):
 
 def format_docstring(s):
     """
-    Format a docstring to standard format.
+    Apply specific formatting to docstring
     """
     if s.startswith('"') or s.startswith('\n'):
         return format_docstring(s[1:])
@@ -40,7 +39,7 @@ def format_docstring(s):
 
 def docstring(files):
     """
-    Generate a concise docstring for a Python function using OpenAI API.
+    Generate docstrings for Python functions in specified files using OpenAI API.
     """
     for file_path, content in files.items():
         if file_path.split(".")[1]:
@@ -64,4 +63,4 @@ def docstring(files):
 
                 # Write the modified code back to the file
                 with open(file_path, "w") as f:
-                    f.write(red.dumps())
+                    f.write(red.dumps().replace("\t", " " * 4))

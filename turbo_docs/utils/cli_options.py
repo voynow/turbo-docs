@@ -3,7 +3,7 @@ from typing import Callable
 
 def copy(func: Callable) -> Callable:
     """
-    Make it possible to copy directory text to clipboard.
+    Create a click option to enable the user to copy directory text to clipboard
     """
     return click.option(
         '--copy',
@@ -14,7 +14,7 @@ def copy(func: Callable) -> Callable:
 
 def readme(func: Callable) -> Callable:
     """
-    Decorate a function to add an option for generating a README.md file.
+    Decorate a function with the `--readme` option to generate a README.md file.
     """
     return click.option(
         '--readme',
@@ -25,7 +25,7 @@ def readme(func: Callable) -> Callable:
 
 def readme_large_repo(func: Callable) -> Callable:
     """
-    Adds an optional flag to generate readme for larger repositories.
+    Run function to generate README for larger repositories.
     """
     return click.option(
         '--readme_large_repo',
@@ -36,8 +36,7 @@ def readme_large_repo(func: Callable) -> Callable:
 
 def unit_tests(func: Callable) -> Callable:
     """
-    Add the '--unit_tests' option for a given function that, when true, generates
-    unit tests for each code file.
+    Enable generation of unit tests for each code file.
     """
     return click.option(
         '--unit_tests',
@@ -48,7 +47,7 @@ def unit_tests(func: Callable) -> Callable:
 
 def docstring(func: Callable) -> Callable:
     """
-    Decorate function to generate and insert docstrings for each function.
+    Autogenerate docstrings for functions.
     """
     return click.option(
         '--docstring',
@@ -59,8 +58,7 @@ def docstring(func: Callable) -> Callable:
 
 def commit(func: Callable) -> Callable:
     """
-    Decorator to add a command line option to a function to generate a commit
-    message and execute the commit.
+    Decorate a function to generate a commit message and execute a commit.
     """
     return click.option(
         '--commit',

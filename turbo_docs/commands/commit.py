@@ -5,7 +5,8 @@ from turbo_docs.utils import openai_api
 
 def get_commit_prompt(repo, files):
     """
-    Generate a prompt for a commit message with relevant code included.
+    Create a prompt to generate a useful, concise commit message for a given set of
+    files and repository.
     """
     diff = repo.git.diff("--cached", "HEAD")
 
@@ -29,8 +30,7 @@ def get_commit_prompt(repo, files):
 
 def commit(files):
     """
-    Commit files to the repository with a generated commit message, prompted to the
-    user for confirmation.
+    Commit changes using GPT-generated commit message and user confirmation.
     """
     repo = Repo()
     repo.git.add(".")
