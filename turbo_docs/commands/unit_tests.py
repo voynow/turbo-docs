@@ -1,4 +1,3 @@
-
 import os
 from pathlib import Path
 from turbo_docs.utils import openai_api
@@ -6,7 +5,7 @@ from turbo_docs.utils import openai_api
 
 def create_tests(test_file_path, file_content):
     """
-    Run create tests to generate unit tests for a specified file path.
+    Write unit tests for Python code files.
     """
     print(f"(--tests) Generating unit tests for {test_file_path}")
     prompt = f"Generate unit tests for the following code:\n{file_content}"
@@ -17,8 +16,7 @@ def create_tests(test_file_path, file_content):
 
 def unit_tests(files):
     """
-    Create test for each file in the "files" dictionary, prompting the user if
-    they would like to create unit tests for the file.
+    Create unit tests from a list of files (stored as key-value pairs).
     """
     tests_dir = "tests"
     Path(tests_dir).mkdir(exist_ok=True)

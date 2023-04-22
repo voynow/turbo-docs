@@ -1,4 +1,3 @@
-
 from redbaron import RedBaron
 import textwrap
 from turbo_docs.utils import openai_api
@@ -6,7 +5,8 @@ from turbo_docs.utils import openai_api
 
 def wrap_text(text):
     """
-    Wrap the given text to 80 characters.
+    Wraps text to appropriate length of 80 characters, with no breaking of long
+    words.
     """
     line_length = 80
 
@@ -20,7 +20,7 @@ def wrap_text(text):
 
 def format_docstring(s):
     """
-    Format a docstring to fit standard rules
+    Format a docstring to standard format.
     """
     if s.startswith('"') or s.startswith('\n'):
         return format_docstring(s[1:])
@@ -40,7 +40,7 @@ def format_docstring(s):
 
 def docstring(files):
     """
-    Generate a docstring for a function in a Python file
+    Generate a concise docstring for a Python function using OpenAI API.
     """
     for file_path, content in files.items():
         if file_path.split(".")[1]:

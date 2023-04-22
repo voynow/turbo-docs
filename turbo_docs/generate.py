@@ -23,9 +23,8 @@ def driver(
         commit: bool
 ) -> None:
     """
-    Processes the specified command line arguments and calls functions 
-    accordingly, such as copying directory text to the clipboard, 
-    generating README.md files, generating tests, or generating docstring.
+    Runs the driver function to copy directory text to clipboard, generate
+    README.md, docs.md, unit tests, docstring, and commit.
     """
     files = directory.get_files()
     dir_text = "\n\n".join(
@@ -35,6 +34,10 @@ def driver(
     if copy:
         pyperclip.copy(dir_text)
         print("(--copy) Directory text copied to clipboard")
+
+    # Generate docstring for each function if specified
+    if docstring:
+        docstring_module.docstring(files)
 
     # Generate README.md file if specified
     if readme:
@@ -46,15 +49,15 @@ def driver(
 
     # Generate unit tests for each code file if specified
     if unit_tests:
+        print("Warning: This feature is still in development. GPT4 will likely solve this problem waiting on API access. -voynow")
         unit_tests_module.unit_tests(files)
 
     # Generate docstring for each function if specified
-    if docstring:
-        docstring_module.docstring(files)
-
-    # Generate docstring for each function if specified
     if commit:
+        print("Warning: This feature is still in development. GPT4 will likely solve this problem waiting on API access. -voynow")
         commit_module.commit(files)
+
+
 
 
 if __name__ == '__main__':
