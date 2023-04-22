@@ -4,20 +4,21 @@ import os
 
 def openai_init():
     """
-    Initialize the OpenAI API with API Key stored in environment variable.
+    Initializes OpenAI API and sets API key.
     """
     import openai
     openai.api_key = os.environ.get('OPENAI_API_KEY')
 
     if not openai.api_key:
-        raise ValueError("Cannot find API key. Run the following command: export OPENAI_API_KEY=<your_api_key>")
+        print("OpenAI API key is not set. Please set it as an environment variable (export OPENAI_API_KEY=<your_api_key>) or enter it below.")
+        print("If you have not done so already, create an OpenAI account at https://platform.openai.com/overview.")
+        openai.api_key = input("Secret key:")
     return openai
 
 
 def gpt_completion_wrapper(prompt):
     """
-    GPT-3 completion wrapper that fetches a completion from OpenAI package and
-    returns it, with specified parameters.
+    Wraps OpenAI's text completion model to generate a result for the given prompt.
     """
     openai_package = openai_init()
     completions = openai_package.Completion.create(

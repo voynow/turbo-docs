@@ -23,9 +23,8 @@ def driver(
         commit: bool
 ) -> None:
     """
-    Processes the specified command line arguments and calls functions 
-    accordingly, such as copying directory text to the clipboard, 
-    generating README.md files, generating tests, or generating docstring.
+    Runs the driver function to copy directory text to clipboard, generate
+    README.md, docs.md, unit tests, docstring, and commit.
     """
     files = directory.get_files()
     dir_text = "\n\n".join(
@@ -55,6 +54,8 @@ def driver(
     # Generate docstring for each function if specified
     if commit:
         commit_module.commit(files)
+
+
 
 
 if __name__ == '__main__':
