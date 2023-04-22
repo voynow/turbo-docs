@@ -16,11 +16,13 @@ def openai_init():
     return openai
 
 
-def gpt_completion_wrapper(prompt):
+def gpt_completion_wrapper(prompt, openai_package=None):
     """
     Wraps OpenAI's text completion model to generate a result for the given prompt.
     """
-    openai_package = openai_init()
+    if not openai_package:
+        openai_package = openai_init()
+
     completions = openai_package.Completion.create(
         engine="text-davinci-003",
         prompt=prompt,
@@ -29,3 +31,17 @@ def gpt_completion_wrapper(prompt):
         stop=None,
     )
     return completions.choices[0]['text'].strip()
+
+
+def gpt_completion_error_handler(prompt):
+    """
+    Wraps OpenAI's text completion model to generate a result for the given prompt.
+    """
+    text = None
+    openai_package = openai_init()
+
+    try:
+        text = gpt_completion_wrapper(prompt, openai_package=openai_package)
+    except openai_package.error.InvalidRequestError as e:
+        print(f"Caught OpenAI API error: {e}")
+    return text

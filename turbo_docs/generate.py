@@ -35,6 +35,10 @@ def driver(
         pyperclip.copy(dir_text)
         print("(--copy) Directory text copied to clipboard")
 
+    # Generate docstring for each function if specified
+    if docstring:
+        docstring_module.docstring(files)
+
     # Generate README.md file if specified
     if readme:
         readme_module.readme(dir_text)
@@ -45,14 +49,12 @@ def driver(
 
     # Generate unit tests for each code file if specified
     if unit_tests:
+        print("Warning: This feature is still in development. GPT4 will likely solve this problem waiting on API access. -voynow")
         unit_tests_module.unit_tests(files)
 
     # Generate docstring for each function if specified
-    if docstring:
-        docstring_module.docstring(files)
-
-    # Generate docstring for each function if specified
     if commit:
+        print("Warning: This feature is still in development. GPT4 will likely solve this problem waiting on API access. -voynow")
         commit_module.commit(files)
 
 
