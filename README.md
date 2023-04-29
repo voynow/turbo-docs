@@ -3,7 +3,6 @@ A library for creating **formatted & user-friendly** readmes from existing files
 
 ## Features 
 -   Generates **README.md** for the current directory from files
--   For larger repositories, uses the alternative command `turbo_docs --readme_large_repo`
 -   Copies directory text to clipboard using **Pyperclip**, useful for working with chatGPT
 -   Generates **docstrings** for all functions in your codebase
 
@@ -26,3 +25,7 @@ For more options, use the following flags:
 -   Pyperclip
 -   RedBaron
 -   GitPython
+
+
+## Contributers?
+It's great to have you on board! Begin by exploring the above commands. Ensure you're aware of any existing issues and don't hesitate to create new ones if required. And if you have any questions, reach out at voynow99@gmail.com or https://www.linkedin.com/in/voynow/.
