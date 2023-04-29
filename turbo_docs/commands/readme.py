@@ -4,8 +4,8 @@ from turbo_docs.utils import openai_api
 
 def readme(text):
     """
-    Generate a formatted & user-friendly README.md using openai API and output it to
-    a README.md file
+    Generate a formatted and user-friendly README.md using openAI API, or use an
+    alternative command if unable to generate.
     """
     readme = "README.md"
     prompt = f"Create a formatted & user-friendly readme.md from the following:\n\n{text}"
@@ -18,11 +18,10 @@ def readme(text):
         print(f"(--readme) Generated README.md")
 
 
-
-
 def readme_large_repo(files):
     """
-    Generate a README.md for larger repositories
+    return flatmap Create a summarization for files, soliciting user input if the
+    summary is satisfactory.
     """
     responses = {}
     for file_path, file_content in files.items():
@@ -31,7 +30,7 @@ def readme_large_repo(files):
             prompt = f"Condense the following information, minimize the amount of tokens used and maximize the preservation of information:\n{file_content}"
             responses[file_path] = openai_api.gpt_completion_wrapper(prompt)
     flatmap = "\n\n\n".join([f"{file_path}:\n{summary}" for file_path, summary in responses.items()])
-    
+
     user_acceptance = False
     while not user_acceptance:
         readme(flatmap)

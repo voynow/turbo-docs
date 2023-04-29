@@ -3,3 +3,4 @@ venv
 secrets_manager.py
 build
 dist
+*.egg-info
