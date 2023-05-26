@@ -24,24 +24,14 @@ def gpt_completion_wrapper(prompt, openai_package=None, gpt_engine="gpt-4"):
     if not openai_package:
         openai_package = openai_init()
 
-    if gpt_engine == "text-davinci-003":
-        completions = openai_package.Completion.create(
-            engine=gpt_engine,
-            prompt=prompt,
-            max_tokens=2048,
-            n=1,
-            stop=None,
+    resp = openai_package.ChatCompletion.create(
+        model=gpt_engine,
+        messages=[
+                {"role": "system", "content": "You are a helpful coding assistant."},
+                {"role": "user", "content": prompt},
+            ]
         )
-        return completions.choices[0]['text'].strip()
-    if gpt_engine == "gpt-4":
-        resp = openai_package.ChatCompletion.create(
-            model=gpt_engine,
-            messages=[
-                    {"role": "system", "content": "You are a helpful coding assistant."},
-                    {"role": "user", "content": prompt},
-                ]
-            )
-        return resp['choices'][0]['message']['content'].strip()
+    return resp['choices'][0]['message']['content'].strip()
 
 
 def gpt_completion_error_handler(prompt):
