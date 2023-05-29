@@ -1,0 +1,6 @@
+# Files or directories to exclude
+
+# Example syntax to exlude requirements files
+#    exclude = [
+#        "requirements.*"
+#    ]
