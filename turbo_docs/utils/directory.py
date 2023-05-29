@@ -1,6 +1,5 @@
 import fnmatch
 import os
-from pathlib import Path
 import toml
 from typing import List, Dict
 
@@ -12,11 +11,9 @@ def read_exclude_config():
     try:
         with open("exclude.toml", "r") as config_file:
             config_data = toml.load(config_file)
+            exclude = config_data.get("exclude", [])
     except FileNotFoundError:
-        raise ValueError("exclude.toml file is missing.")
-
-    exclude = config_data.get("exclude", [])
-
+        exclude = []
     return exclude
 
 
