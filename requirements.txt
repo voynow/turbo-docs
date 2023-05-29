@@ -4,3 +4,4 @@ click
 pyperclip
 redbaron
 gitpython
+toml
