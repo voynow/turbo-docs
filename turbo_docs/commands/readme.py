@@ -7,7 +7,7 @@ def readme(text):
     Generate a README.md using openAI API 
     """
     readme = "README.md"
-    prompt = f"Create a readme.md documenting the following repo:\n\n{text}"
+    prompt = f"You are an expert software developer. Create a well-formatted, user-firendly readme.md documenting the following repo:\n\n{text}"
     response = openai_api.gpt_completion_error_handler(prompt)
     if response is None:
         print("Unable to generate README.md, it seems like you have uploaded too many tokens.\nAdd files to your .gitignore to remove them during the readme generation process.")
