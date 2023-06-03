@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
 	name="turbo_docs",
-	version="0.8.4",
+	version="0.8.5",
 	packages=find_packages(),
 	install_requires=[
 		"requests",
@@ -11,6 +11,7 @@ setup(
 		"pyperclip",
 		"redbaron",
 		"gitpython",
+    	"toml",
 	],
 	entry_points={
 		"console_scripts": [
