@@ -16,11 +16,3 @@ def readme(func: Callable) -> Callable:
         is_flag=True,
         help='Generate README.md file'
     )(func)
-
-def docstring(func: Callable) -> Callable:
-    return click.option(
-        '--docstring',
-        default=False,
-        is_flag=True,
-        help='Generate and insert docstrings for each function'
-    )(func)

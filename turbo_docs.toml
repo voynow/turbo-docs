@@ -1,0 +1,9 @@
+ignore = [
+    "__pycache__",
+    "venv",
+    "build",
+    "dist",
+    "*.egg-info",
+    ".git",
+    "README.md",  # This is recommended so that --readme doesn't include the readme file itself
+]
