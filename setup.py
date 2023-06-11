@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
 	name="turbo_docs",
-	version="0.8.5",
+	version="0.9.0",
 	packages=find_packages(),
 	install_requires=[
 		"requests",
@@ -12,6 +12,7 @@ setup(
 		"redbaron",
 		"gitpython",
     	"toml",
+        "pathspec",
 	],
 	entry_points={
 		"console_scripts": [

@@ -1,61 +1,85 @@
 # Turbo Docs
 
-Turbo Docs is a Python script that utilizes OpenAI's GPT API to generate README.md files and docstrings for your Python projects automatically.
+Turbo Docs is a Python tool designed to help developers generate a well-formatted README.md file for their repository and perform other tasks related to gathering information from their codebase.
 
-## Requirements
+## Installation
 
-To use Turbo Docs, you will need to have the following Python packages installed:
+You can install Turbo Docs using pip:
 
-- setuptools
-- wheel
-- twine
-- requests
-- openai
-- click
-- pyperclip
-- redbaron
-- gitpython
-- toml
-
-You can install them using the requirements.txt and requirements.dev.txt files in the repository.
+```bash
+pip install turbo_docs
+```
 
 ## Usage
 
-To generate a README.md or docstrings for the current directory, you can run the `generate.py` script in the `turbo_docs` folder:
+Turbo Docs provides command line options for various tasks, such as generating a README.md file, or copying the formatted directory text to the clipboard. To use Turbo Docs, run the following command in your terminal:
 
 ```bash
-# install tubro_docs
-pip install turbo_docs
-
-# command line interface
-turbo_docs [--copy] [--readme] [--docstring]
+turbo_docs [options]
 ```
 
-You can use the optional flags:
-- `--copy`: Copy the directory text to clipboard.
-- `--readme`: Generate README.md file.
-- `--docstring`: Generate and insert docstrings for each function.
+### Available Options
 
-## Customization
+- `--copy`: Copy the formatted text of the entire directory to clipboard. This can be useful when working with GPT. Example:
 
-You can modify the files and directories that are excluded from the documentation generation by editing the `exclude.toml` file in the root of the repository. 
+  ```
+  turbo_docs --copy
+  ```
 
-Example syntax to exclude requirements files:
+- `--readme`: Generate a well-formatted README.md file for the repository. Example:
+
+  ```
+  turbo_docs --readme
+  ```
+
+## Configuration
+
+To configure Turbo Docs, create a `turbo_docs.toml` file in the root of your project and specify the files and directories to ignore. The following example shows how to exclude different types of files and directories:
 
 ```toml
-exclude = [
-  "requirements.*"
+ignore = 
+    "__pycache__",
+    "venv",
+    "build",
+    "dist",
+    "*.egg-info",
+    ".git",
+    "README.md",  # This is recommended so that --readme doesn't include the readme file itself
 ]
 ```
 
-## Modules
+## Files and Folders Overview
 
-Turbo Docs consists of three main modules:
+Here's an overview of the files and folders in the Turbo Docs repository:
 
-1. `turbo_docs.commands.docstring`: Contains functions to generate docstrings for Python functions using GPT-3 text completion model.
-2. `turbo_docs.commands.readme`: Contains a function to generate a README.md file using the OpenAI API.
-3. `turbo_docs.utils`: Contains utility functions and decorators for working with CLI options, directories, and the OpenAI API.
+- `turbo_docs\commands\readme.py`: Contains the `readme` function that generates a README.md file using the OpenAI API.
+- `turbo_docs\commands\__init__.py`: The init file for the `turbo_docs.commands` package.
+- `turbo_docs\generate.py`: The main module containing the `driver` function which is the entry point for the script.
+- `turbo_docs\utils\cli_options.py`: Contains the functions for adding command-line options, such as `copy` and `readme`.
+- `turbo_docs\utils\directory.py`: Contains utility functions for working with directories and reading text from files.
+- `turbo_docs\utils\openai_api.py`: Contains utility functions for interacting with the OpenAI API.
+- `turbo_docs\__init__.py`: The init file for the `turbo_docs` package.
+- `.gitignore`: A list of files and directories to be ignored by GIT.
+- `exclude.toml`: Example toml configuration file for specifying files or directories to exclude.
+- `requirements.txt`: Lists all the required Python packages for Turbo Docs.
+- `setup.py`: Sets up the Turbo Docs Python package.
+- `turbo_docs.toml`: The Turbo Docs configuration file.
 
-## Contributing
+## Dependencies
 
-Contributions are always welcome! If you have ideas for improvements or bug fixes, please open an issue or submit a pull request.
+Turbo Docs uses the following Python packages:
+
+- `requests`
+- `openai`
+- `click`
+- `pyperclip`
+- `redbaron`
+- `gitpython`
+- `toml`
+- `pathspec`
+
+Please make sure these packages are installed before running Turbo Docs.
+
+## License
+
+Turbo Docs is released under the MIT License. See the LICENSE file for more details.
