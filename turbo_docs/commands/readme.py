@@ -1,14 +1,18 @@
-import os
 from turbo_docs.utils import openai_api
 
+TEMPLATE = """
+"You are an expert software developement assistant.
 
-def readme(text):
+Create a well-formatted, user-firendly readme.md documenting the following repo:
+{repo}
+"""
+
+def readme(repo, template=TEMPLATE):
     """
-    Generate a README.md using openAI API 
+    Generate a README.md using openAI API
     """
     readme = "README.md"
-    prompt = f"You are an expert software developer. Create a well-formatted, user-firendly readme.md documenting the following repo:\n\n{text}"
-    response = openai_api.gpt_completion_error_handler(prompt)
+    response = openai_api.gpt_completion(template, {"repo": repo})
     if response is None:
         print("Unable to generate README.md, it seems like you have uploaded too many tokens.")
     else:

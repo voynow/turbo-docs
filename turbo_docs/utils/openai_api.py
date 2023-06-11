@@ -1,48 +1,29 @@
-import json
 import os
+import openai
+
+if not os.environ.get("OPENAI_API_KEY"):
+	print("OpenAI API key is not set. Please set it as an environment variable (export OPENAI_API_KEY=<your_api_key>) or enter it below.")
+	print("If you have not done so already, create an OpenAI account at https://platform.openai.com/overview.")
+	os.environ['OPENAI_API_KEY'] = input("Secret key:")
+
+from llm_blocks import chat_utils
 
 
-def openai_init():
-    """
-    Initialize the OpenAI API and prompt the user for their API key if it is not
-    stored as an environment variable.
-    """
-    import openai
-    openai.api_key = os.environ.get('OPENAI_API_KEY')
+def gpt_completion(template, inputs, model="gpt-3.5-turbo"):
+	"""Genneric chat wrapper over the OpenAI API"""
 
-    if not openai.api_key:
-        print("OpenAI API key is not set. Please set it as an environment variable (export OPENAI_API_KEY=<your_api_key>) or enter it below.")
-        print("If you have not done so already, create an OpenAI account at https://platform.openai.com/overview.")
-        openai.api_key = input("Secret key:")
-    return openai
+	if model == "gpt-4":
+		print("Using model=GPT-4. This may take a few seconds...")
+		print("Warning: This model is under limited beta access and is not available to all users.")
+	resp = None
 
+	try:
+		chain = chat_utils.GenericChain(
+			template=template, 
+			model_name=model
+		)
+		resp = chain(inputs)['text']
+	except openai.error.InvalidRequestError as e:
+		print(f"Caught OpenAI API error: {e}")
 
-def gpt_completion_wrapper(prompt, openai_package=None, gpt_engine="gpt-4"):
-    """
-    Provide GPT-3 completions for a given prompt and optional OpenAI package.
-    """
-    if not openai_package:
-        openai_package = openai_init()
-
-    resp = openai_package.ChatCompletion.create(
-        model=gpt_engine,
-        messages=[
-                {"role": "system", "content": "You are a helpful coding assistant."},
-                {"role": "user", "content": prompt},
-            ]
-        )
-    return resp['choices'][0]['message']['content'].strip()
-
-
-def gpt_completion_error_handler(prompt):
-    """
-    Handle errors raised by OpenAI GPT completion API.
-    """
-    text = None
-    openai_package = openai_init()
-
-    try:
-        text = gpt_completion_wrapper(prompt, openai_package=openai_package)
-    except openai_package.error.InvalidRequestError as e:
-        print(f"Caught OpenAI API error: {e}")
-    return text
+	return resp
