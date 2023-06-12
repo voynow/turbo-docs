@@ -7,12 +7,18 @@ Create a well-formatted, user-firendly readme.md documenting the following repo:
 {repo}
 """
 
-def readme(repo, template=TEMPLATE):
+def readme(repo, gpt3=False, template=TEMPLATE):
     """
-    Generate a README.md using openAI API
+    Chose between GPT-3.5 Turbo and GPT-4, allow for template override, and
+    generate a README.md file for the current repo.
     """
     readme = "README.md"
-    response = openai_api.gpt_completion(template, {"repo": repo})
+    if gpt3:
+        model = "gpt-3.5-turbo"
+    else:
+        model = "gpt-4"
+
+    response = openai_api.gpt_completion(template, {"repo": repo}, model)
     if response is None:
         print("Unable to generate README.md, it seems like you have uploaded too many tokens.")
     else:

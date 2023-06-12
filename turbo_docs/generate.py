@@ -7,9 +7,11 @@ from turbo_docs.utils import directory, cli_options
 @click.command()
 @cli_options.copy
 @cli_options.readme
+@cli_options.gpt3
 def driver(
         copy: bool,
         readme: bool,
+        gpt3: bool,
 ) -> None:
     """
     Pull text from all files in the current directory and apply the following commands:
@@ -24,11 +26,11 @@ def driver(
 
     if copy:
         pyperclip.copy(dir_text)
-        print("(--copy) Directory text copied to clipboard")
+        print("Directory copied to clipboard")
 
     if readme:
-        readme_module.readme(dir_text)
-        print("(--readme) README.md file generated")
+        readme_module.readme(dir_text, gpt3)
+        print("Generated README.md")
 
 
 if __name__ == '__main__':
