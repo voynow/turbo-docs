@@ -1,16 +1,54 @@
 # Turbo Docs
 
-Turbo Docs is a Python package that helps you generate a well-formatted, user-friendly README.md file for your repository using GPT-3.5-turbo or GPT-4 (default). It also provides a command to copy the text from all files in the current directory to the clipboard, which is useful when working with ChatGPT.
+Turbo Docs is a Python package that helps you generate a professional README.md file for your repository using GPT-3.5 Turbo or GPT-4. It can also copy the text from all files in the current directory to the clipboard, which is useful when working with ChatGPT.
 
 ## Installation
 
-To install Turbo Docs, run the following command:
+To install Turbo Docs, you need to have Python 3.6 or higher. You can install the package using pip:
 
 ```bash
 pip install turbo_docs
 ```
 
-## Requirements
+## Setup
+
+Before using Turbo Docs, you need to set up your OpenAI API key. If you don't have an API key, create an OpenAI account at https://platform.openai.com/overview. Then, set the API key as an environment variable:
+
+```bash
+export OPENAI_API_KEY=<your_api_key>
+```
+
+## Usage
+
+To use Turbo Docs, navigate to your project directory and run the following command:
+
+```bash
+turbo_docs
+```
+
+### Options
+
+- `--copy`: Copy the directory text to the clipboard. Useful for working with ChatGPT.
+- `--readme`: Generate a README.md file. Useful for keeping documentation up to date.
+- `--gpt3`: Use the GPT-3.5 Turbo model instead of GPT-4.
+
+## Configuration
+
+You can configure Turbo Docs to ignore specific files and folders by creating a `turbo_docs.toml` file in your project directory. Add the files and folders you want to ignore in the `ignore` list:
+
+```toml
+ignore = [
+    "__pycache__",
+    "venv",
+    "build",
+    "dist",
+    "*.egg-info",
+    ".git",
+    "README.md",  # This is recommended so that --readme doesn't include the readme file itself
+]
+```
+
+## Dependencies
 
 Turbo Docs requires the following packages:
 
@@ -24,47 +62,7 @@ Turbo Docs requires the following packages:
 - toml
 - pathspec
 
-These packages will be installed automatically when you install Turbo Docs.
-
-## Usage
-
-To use Turbo Docs, run the following command in your terminal:
-
-```bash
-turbo_docs [OPTIONS]
-```
-
-### Options
-
-- `--copy`: Copy the directory text to the clipboard. Useful for working with ChatGPT.
-- `--readme`: Generate a README.md file. Useful for keeping documentation up to date.
-- `--gpt3`: Use the GPT-3.5 Turbo model instead of GPT-4.
-
-### Example
-
-To generate a README.md file using GPT-3.5-turbo, run the following command:
-
-```bash
-turbo_docs --readme --gpt3
-```
-
-## Configuration
-
-You can configure Turbo Docs by creating a `turbo_docs.toml` file in your repository. This file allows you to specify files and folders to ignore when generating the README.md file or copying the directory text to the clipboard.
-
-Example `turbo_docs.toml`:
-
-```toml
-ignore = [
-    "__pycache__",
-    "venv",
-    "build",
-    "dist",
-    "*.egg-info",
-    ".git",
-    "README.md",  # This is recommended so that --readme doesn't include the readme file itself
-]
-```
+These dependencies will be installed automatically when you install Turbo Docs using pip.
 
 ## License
 
