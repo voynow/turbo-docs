@@ -1,9 +1,8 @@
-from turbo_docs.utils import openai_api
 
 TEMPLATE = """
 "You are an expert software developement assistant.
 
-Create a well-formatted, user-firendly readme.md documenting the following repo:
+Create a formatted professional README.md documenting setup and usage of the following repo:
 {repo}
 """
 
@@ -12,9 +11,11 @@ def readme(repo, gpt3=False, template=TEMPLATE):
     Chose between GPT-3.5 Turbo and GPT-4, allow for template override, and
     generate a README.md file for the current repo.
     """
+    from turbo_docs.utils import openai_api
+
     readme = "README.md"
     if gpt3:
-        model = "gpt-3.5-turbo"
+        model = "gpt-3.5-turbo-16k"
     else:
         model = "gpt-4"
 
