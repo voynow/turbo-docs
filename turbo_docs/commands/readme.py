@@ -1,9 +1,16 @@
 
 TEMPLATE = """
-"You are an expert software developement assistant.
-
-Create a formatted professional README.md documenting setup and usage of the following repo:
+"You are an expert software developement assistant. Write a README.md for the following repo:
 {repo}
+
+Here are the requirements for the README.md:
+- written in highly formatted markdown
+- contain a title and high level overview
+- pitch for why the tool is useful
+- contain table of contents highlighting repo structure
+- example usage of important functions
+- contain all possible applicable badges (pypi, github, etc.)
+- emoji are encouraged. One for each section at minimum.
 """
 
 def readme(repo, gpt3=False, template=TEMPLATE):
@@ -23,5 +30,6 @@ def readme(repo, gpt3=False, template=TEMPLATE):
     if response is None:
         print("Unable to generate README.md, it seems like you have uploaded too many tokens.")
     else:
-        with open(readme, "w") as readme_file:
+        print(response)
+        with open(readme, "w", encoding="utf-8") as readme_file:
             readme_file.write(response)

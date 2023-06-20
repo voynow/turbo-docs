@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
 	name="turbo_docs",
-	version="0.9.2",
+	version="0.9.3",
 	packages=find_packages(),
 	install_requires=[
 		"requests",
@@ -32,3 +32,6 @@ setup(
 	long_description=open("README.md", encoding="utf-8").read(),
     long_description_content_type='text/markdown'
 )
+
+# python setup.py sdist bdist_wheel
+# twine upload dist/*
