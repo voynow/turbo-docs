@@ -1,8 +1,7 @@
 # Turbo Docs 🚀
 
 [![PyPI version](https://badge.fury.io/py/turbo_docs.svg)](https://badge.fury.io/py/turbo_docs)
-[![GitHub stars](https://img.shields.io/github/stars/yourusername/turbo_docs.svg)](https://github.com/voynow/turbo-docs/stargazers)
-[![GitHub license](https://img.shields.io/github/license/yourusername/turbo_docs.svg)](https://github.com/voynow/turbo-docs/blob/main/LICENSE)
+[![GitHub stars](https://img.shields.io/github/stars/voynow/turbo_docs.svg)](https://github.com/voynow/turbo_docs/stargazers)
 
 Turbo Docs is a powerful Python tool that helps developers automatically generate high-quality README.md files for their repositories. It leverages the power of OpenAI's GPT-3.5 Turbo and GPT-4 models to create well-structured, informative, and engaging documentation.
 
