@@ -13,6 +13,7 @@ setup(
 		"gitpython",
     	"toml",
         "pathspec",
+        "llm-blocks",
 	],
 	entry_points={
 		"console_scripts": [

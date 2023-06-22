@@ -1,24 +1,25 @@
 # Turbo Docs 🚀
 
-Turbo Docs is a powerful Python tool that helps developers generate high-quality README.md files for their repositories. It uses OpenAI's GPT-3.5 Turbo and GPT-4 models to create well-structured and informative documentation.
+[![PyPI version](https://badge.fury.io/py/turbo_docs.svg)](https://badge.fury.io/py/turbo_docs)
+[![GitHub stars](https://img.shields.io/github/stars/voynow/turbo-docs.svg)](https://github.com/voynow/turbo-docs/stargazers)
+
+Turbo Docs is a powerful Python tool that helps developers automatically generate high-quality README.md files for their repositories. It leverages the power of OpenAI's GPT-3.5 Turbo and GPT-4 models to create well-structured, informative, and engaging documentation.
 
 ## Why Turbo Docs? 🤔
 
-Writing a good README.md file is essential for any software project, as it provides an overview of the project, its purpose, and how to use it. However, creating a comprehensive and well-structured README.md can be time-consuming. Turbo Docs automates this process, allowing developers to focus on writing code while ensuring their documentation is up-to-date and professional.
+Writing good documentation is essential for any software project, but it can be time-consuming and tedious. Turbo Docs simplifies this process by generating a README.md file that meets all your requirements, allowing you to focus on writing great code.
 
 ## Table of Contents 📚
 
 - [Installation](#installation)
 - [Usage](#usage)
-  - [Generate README.md](#generate-readmemd)
-  - [Copy Directory Text](#copy-directory-text)
-- [Requirements](#requirements)
-- [Contributing](#contributing)
-- [License](#license)
+- [Repo Structure](#repo-structure)
+- [Example Usage](#example-usage)
+- [Badges](#badges)
 
 ## Installation 💻
 
-To install Turbo Docs, simply run the following command:
+To install Turbo Docs, simply run:
 
 ```bash
 pip install turbo_docs
@@ -26,50 +27,66 @@ pip install turbo_docs
 
 ## Usage 🛠️
 
-### Generate README.md 📝
-
-To generate a README.md file for your repository, navigate to the root directory of your project and run the following command:
+To use Turbo Docs, navigate to your project's root directory and run:
 
 ```bash
 turbo_docs --readme
 ```
 
-By default, Turbo Docs uses the GPT-4 model. To use the GPT-3.5 Turbo model instead, add the `--gpt3` flag:
+This will generate a README.md file for your project. You can also use the `--gpt3` flag to use the GPT-3.5 Turbo model:
 
 ```bash
 turbo_docs --readme --gpt3
 ```
 
-### Copy Directory Text 📋
-
-To copy the text from all files in the current directory to your clipboard, run the following command:
+Additionally, you can copy the directory text to the clipboard by using the `--copy` flag:
 
 ```bash
 turbo_docs --copy
 ```
 
-This can be useful when working with ChatGPT.
+## Repo Structure 🏗️
 
-## Requirements 📦
+```
+turbo_docs/
+│
+├── commands/
+│   ├── __init__.py
+│   └── readme.py
+│
+├── utils/
+│   ├── __init__.py
+│   ├── cli_options.py
+│   ├── directory.py
+│   └── openai_api.py
+│
+├── __init__.py
+├── generate.py
+├── setup.py
+└── turbo_docs.toml
+```
 
-Turbo Docs requires the following packages:
+## Example Usage 📖
 
-- requests
-- openai
-- llm-blocks
-- click
-- pyperclip
-- redbaron
-- gitpython
-- toml
-- pathspec
+Here's an example of how to use Turbo Docs to generate a README.md file:
 
-These dependencies are automatically installed when you install Turbo Docs using pip.
+```python
+from turbo_docs.commands import readme
 
-## Contributing 🤝
+# Define your repo structure as a string
+repo = """
+{'repo': 'example_repo',
+ 'files': {
+     'main.py': 'print("Hello, World!")',
+     'README.md': ''
+ }
+}
+"""
 
-Contributions are welcome! If you'd like to improve Turbo Docs, please feel free to submit a pull request or open an issue on GitHub.
+# Generate the README.md file
+readme(repo)
+```
 
 ## License 📄
 
-Turbo Docs is released under the MIT License. See [LICENSE](LICENSE) for more information.
+Turbo Docs is released under the [MIT License](https://opensource.org/licenses/MIT).
