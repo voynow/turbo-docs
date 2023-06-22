@@ -30,6 +30,5 @@ def readme(repo, gpt3=False, template=TEMPLATE):
     if response is None:
         print("Unable to generate README.md, it seems like you have uploaded too many tokens.")
     else:
-        print(response)
         with open(readme, "w", encoding="utf-8") as readme_file:
             readme_file.write(response)
