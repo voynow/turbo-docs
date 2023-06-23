@@ -1,92 +1,73 @@
 # Turbo Docs 🚀
 
-[![PyPI version](https://badge.fury.io/py/turbo_docs.svg)](https://badge.fury.io/py/turbo_docs)
-[![GitHub stars](https://img.shields.io/github/stars/voynow/turbo-docs.svg)](https://github.com/voynow/turbo-docs/stargazers)
+Turbo Docs is an expert software development assistant that helps you generate and maintain documentation for your Python projects. It automates the process of creating README.md files and function documentation, making it easy to keep your project documentation up-to-date and consistent.
 
-Turbo Docs is a powerful Python tool that helps developers automatically generate high-quality README.md files for their repositories. It leverages the power of OpenAI's GPT-3.5 Turbo and GPT-4 models to create well-structured, informative, and engaging documentation.
+## Table of Contents
 
-## Why Turbo Docs? 🤔
-
-Writing good documentation is essential for any software project, but it can be time-consuming and tedious. Turbo Docs simplifies this process by generating a README.md file that meets all your requirements, allowing you to focus on writing great code.
-
-## Table of Contents 📚
-
+- [Features](#features)
 - [Installation](#installation)
 - [Usage](#usage)
-- [Repo Structure](#repo-structure)
-- [Example Usage](#example-usage)
-- [Badges](#badges)
+- [Requirements](#requirements)
+- [Contributing](#contributing)
+- [License](#license)
 
-## Installation 💻
+## Features ✨
+
+- Generate README.md files for your repositories using GPT-3.5 Turbo or GPT-4 models
+- Automatically create function documentation for your Python code
+- Copy directory text to clipboard for easy integration with ChatGPT
+- Customize templates for generating documentation
+- Easily maintain up-to-date documentation for your projects
+
+## Installation 💾
 
 To install Turbo Docs, simply run:
 
 ```bash
-pip install turbo_docs
+pip install turbo-docs
 ```
 
 ## Usage 🛠️
 
-To use Turbo Docs, navigate to your project's root directory and run:
+To use Turbo Docs, run the following command in your project directory:
 
 ```bash
-turbo_docs --readme
+turbo_docs [OPTIONS]
 ```
 
-This will generate a README.md file for your project. You can also use the `--gpt3` flag to use the GPT-3.5 Turbo model:
+Available options:
+
+- `--copy`: Copy the directory text to clipboard (useful for working with ChatGPT)
+- `--readme`: Generate a README.md file (useful for keeping documentation up-to-date)
+- `--gpt3`: Use the GPT-3.5 Turbo model (useful if you don't have GPT-4 access)
+- `--docs`: Generate documentation for each code file (useful for keeping documentation up-to-date)
+
+Example usage:
 
 ```bash
-turbo_docs --readme --gpt3
+turbo_docs --readme --docs --gpt3
 ```
 
-Additionally, you can copy the directory text to the clipboard by using the `--copy` flag:
+This command will generate a README.md file and create documentation for each code file in the project using gpt-3.5-turbo-16k.
 
-```bash
-turbo_docs --copy
-```
+## Requirements 📋
 
-## Repo Structure 🏗️
+Turbo Docs requires the following Python packages:
 
-```
-turbo_docs/
-│
-├── commands/
-│   ├── __init__.py
-│   └── readme.py
-│
-├── utils/
-│   ├── __init__.py
-│   ├── cli_options.py
-│   ├── directory.py
-│   └── openai_api.py
-│
-├── __init__.py
-├── generate.py
-├── setup.py
-└── turbo_docs.toml
-```
+- requests
+- openai
+- llm-blocks
+- click
+- pyperclip
+- redbaron
+- gitpython
+- toml
+- pathspec
 
-## Example Usage 📖
+## Contributing 🤝
 
-Here's an example of how to use Turbo Docs to generate a README.md file:
-
-```python
-from turbo_docs.commands import readme
-
-# Define your repo structure as a string
-repo = """
-{'repo': 'example_repo',
- 'files': {
-     'main.py': 'print("Hello, World!")',
-     'README.md': ''
- }
-}
-"""
-
-# Generate the README.md file
-readme(repo)
-```
+Contributions are welcome! Please feel free to submit a pull request or open an issue to discuss any improvements or suggestions.
 
 ## License 📄
 
-Turbo Docs is released under the [MIT License](https://opensource.org/licenses/MIT).
+Turbo Docs is released under the MIT License. See [LICENSE](LICENSE) for more information.
