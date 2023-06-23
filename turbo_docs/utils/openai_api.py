@@ -9,22 +9,16 @@ if not os.environ.get("OPENAI_API_KEY"):
 from llm_blocks import chat_utils
 
 
-def gpt_completion(template, inputs, model="gpt-4"):
-	"""Genneric chat wrapper over the OpenAI API"""
+def gpt_completion(template, model="gpt-4", chain=None, **inputs):
+	"""Generic chat wrapper over the OpenAI API"""
 
-	print(f"Using model: {model}")
-	if model == "gpt-4":
-		print("Warning: This model is under limited beta access and is not available to all users.")
-		print("Warning: GPT-4 api calls tend to be slower than other models.")
-	resp = None
-
-	try:
+	if chain is None:
 		chain = chat_utils.GenericChain(
 			template=template, 
 			model_name=model
 		)
+	try:
 		resp = chain(inputs)['text']
 	except openai.error.InvalidRequestError as e:
-		print(f"Caught OpenAI API error: {e}")
-
-	return resp
+		raise ValueError(f"Caught OpenAI API error: {e}")
+	return resp, chain

@@ -1,4 +1,5 @@
 import click
+from pathlib import Path
 import pyperclip
 from turbo_docs.commands import readme as readme_module
 from turbo_docs.commands import docs as docs_module
@@ -33,20 +34,25 @@ def driver(
     """
     dir_text_dict = directory.get_repo_text_dict()
 
+    if gpt3:
+        model = "gpt-3.5-turbo-16k"
+    else:
+        model = "gpt-4"
+        print("Warning: This model is under limited beta access and is not available to all users.")
+        print("Warning: GPT-4 api calls tend to be slower than other models.")
+    print(f"Using model: {model}")
+
     if readme:
-        readme_text_dict = directory.remove_readme(dir_text_dict)
-        readme_text = directory.convert_dict_to_string(readme_text_dict)
-        readme_module.readme(readme_text, gpt3)
+        del dir_text_dict[Path("README.md")]
+        dir_text_str = directory.convert_dict_to_string(dir_text_dict)
+        readme_module.readme(dir_text_str, model)
         print("Generated README.md")
 
     if docs:
-        docs_module.docs(dir_text_dict, gpt3)
+        docs_module.docs(dir_text_dict, model)
         print("Generated documentation")
 
     if copy:
-        pyperclip.copy(directory.convert_dict_to_string(dir_text_dict))
+        dir_text_str = directory.convert_dict_to_string(dir_text_dict)
+        pyperclip.copy(dir_text_str)
         print("Directory copied to clipboard")
-
-
-if __name__ == "__main__":
-    driver()

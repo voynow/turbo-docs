@@ -40,21 +40,9 @@ def get_repo_text_dict():
     else:
         config = toml.load("turbo_docs.toml")
         ignored_patterns = config.get("ignore", [])
-    print(
-        f"Ignoring files and folders matching the following patterns: {ignored_patterns}"
-    )
 
     pathspec = PathSpec.from_lines(GitWildMatchPattern, ignored_patterns)
     return collect_text_from_files(Path("."), pathspec)
-
-
-def remove_readme(file_dict: dict):
-    str_dict = {str(key): value for key, value in file_dict.items()}
-    return {
-        Path(key): value
-        for key, value in str_dict.items()
-        if not key.endswith("README.md")
-    }
 
 
 def convert_dict_to_string(file_dict: dict):
