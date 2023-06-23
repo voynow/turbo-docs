@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
 	name="turbo_docs",
-	version="0.9.3",
+	version="1.0.1",
 	packages=find_packages(),
 	install_requires=[
 		"requests",
