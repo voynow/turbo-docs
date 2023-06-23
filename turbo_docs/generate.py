@@ -9,6 +9,7 @@ from turbo_docs.utils import directory, cli_options
 @cli_options.copy
 @cli_options.readme
 @cli_options.gpt3
+@cli_options.docs
 def driver(
     copy: bool,
     readme: bool,
@@ -32,20 +33,19 @@ def driver(
     """
     dir_text_dict = directory.get_repo_text_dict()
 
-    if copy:
-        pyperclip.copy(directory.convert_dict_to_string(dir_text_dict))
-        print("Directory copied to clipboard")
-
     if readme:
         readme_text_dict = directory.remove_readme(dir_text_dict)
         readme_text = directory.convert_dict_to_string(readme_text_dict)
         readme_module.readme(readme_text, gpt3)
         print("Generated README.md")
 
-
     if docs:
-        docs_module.generate_docs(dir_text_dict, gpt3)
+        docs_module.docs(dir_text_dict, gpt3)
         print("Generated documentation")
+
+    if copy:
+        pyperclip.copy(directory.convert_dict_to_string(dir_text_dict))
+        print("Directory copied to clipboard")
 
 
 if __name__ == "__main__":

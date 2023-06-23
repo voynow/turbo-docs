@@ -4,34 +4,29 @@ from pathlib import Path
 from turbo_docs.utils import openai_api
 
 TEMPLATE = """
-You are an expert software developement assistant. Write documentation for the following function:
+You are an expert software developement assistant tasked with writing documentation for a repository. 
+
+Write documentation for the following function:
 {function}
 
-Here are the requirements for the function documentation:
-- Brief description of the function
-- Detailed description of the parameters
-- Explanation of the return values
-- Sample invocation of the function
+Your documentation should include the following and nothing more:
+## function: function_name
+#### args: arg1, arg2, ...
+Description of function in english as concisely as possible in less than 4 sentences. 
+Do not mlist arguments. Do not give code examples. Minimize tokens at all costs.
 """
 
-
-def split_into_functions(code):
-    """ parse file for functions """
-    module = ast.parse(code)
-    functions = [node for node in module.body if isinstance(node, ast.FunctionDef)]
-    return [ast.unparse(f) for f in functions]
-
-
-def write_to_file(path, function_name, doc):
-    """ append each function doc to file doc """
-    doc_path = Path('docs') / path
+def generate_docs(model, template, function, path):
+    """ Generate and write documentation for a function """
+    documentation = openai_api.gpt_completion(template, {"function": function}, model)
+    doc_path = Path('docs') / path.with_suffix('.md')
     doc_path.parent.mkdir(parents=True, exist_ok=True)
     with open(doc_path, 'a') as f:
-        f.write(f'## {function_name}\n\n{doc}\n\n')
+        f.write(f'{documentation}\n\n')
 
 
-def generate_docs(repo_dict, gpt3=False, template=TEMPLATE):
-
+def docs(repo_dict, gpt3=False, template=TEMPLATE):
+    """ Parse code for functions and generate documentation for each """
     if gpt3:
         model = "gpt-3.5-turbo-16k"
     else:
@@ -39,8 +34,7 @@ def generate_docs(repo_dict, gpt3=False, template=TEMPLATE):
 
     for path, content in repo_dict.items():
         if path.suffix == '.py':
-
-            for function in split_into_functions(content):
-                doc = openai_api.gpt_completion(template, {"function": function}, model)
-                write_to_file(path, function, doc)
-
+            module = ast.parse(content)
+            functions = [ast.unparse(node) for node in module.body if isinstance(node, ast.FunctionDef)]
+            for function in functions:
+                generate_docs(model, template, function, path)
