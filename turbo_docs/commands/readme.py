@@ -13,7 +13,7 @@ Here are the requirements for the README.md:
 - emoji are encouraged. One for each section at minimum.
 """
 
-def readme(repo, gpt3=False, template=TEMPLATE):
+def readme(repo, model, template=TEMPLATE):
     """
     Chose between GPT-3.5 Turbo and GPT-4, allow for template override, and
     generate a README.md file for the current repo.
@@ -21,14 +21,8 @@ def readme(repo, gpt3=False, template=TEMPLATE):
     from turbo_docs.utils import openai_api
 
     readme = "README.md"
-    if gpt3:
-        model = "gpt-3.5-turbo-16k"
-    else:
-        model = "gpt-4"
-
-    response = openai_api.gpt_completion(template, {"repo": repo}, model)
-    if response is None:
-        print("Unable to generate README.md, it seems like you have uploaded too many tokens.")
-    else:
-        with open(readme, "w", encoding="utf-8") as readme_file:
-            readme_file.write(response)
+    chain = openai_api.gpt_completion(template, {"repo": repo}, model)
+    response = chain.logs[-1]['response']['text']
+    
+    with open(readme, "w", encoding="utf-8") as readme_file:
+        readme_file.write(response)

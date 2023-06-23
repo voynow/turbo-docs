@@ -1,40 +1,59 @@
-
 import ast
 from pathlib import Path
-from turbo_docs.utils import openai_api
+import shutil
 
 TEMPLATE = """
-You are an expert software developement assistant tasked with writing documentation for a repository. 
+You are an expert software developement assistant tasked with writing documentation for a repository.
 
-Write documentation for the following function:
-{function}
-
-Your documentation should include the following and nothing more:
+The documentation must following the following format:
 ## function: function_name
 #### args: arg1, arg2, ...
-Description of function in english as concisely as possible in less than 4 sentences. 
-Do not mlist arguments. Do not give code examples. Minimize tokens at all costs.
+Insert description of the function here
+<end>
+
+In your description, describe the function in english as concisely as possible in at least one sentence but less than four sentences. Subtly describe the usefule/counterintuitive aspects of the function. Do not list arguments. Do not give code examples. Minimize tokens at all costs.
+
+Here is the function:
+{function}
+
+Now, write the documentation following the format above.
 """
 
-def generate_docs(model, template, function, path):
-    """ Generate and write documentation for a function """
-    documentation = openai_api.gpt_completion(template, {"function": function}, model)
-    doc_path = Path('docs') / path.with_suffix('.md')
+def generate_docs(path, function, model="gpt-4", template=TEMPLATE, chain=None):
+    """
+    Generate and write documentation for a function. Use existing chain for
+    a cohesive chain of gpt completions.
+    """
+    from turbo_docs.utils import openai_api
+
+    documentation, chain = openai_api.gpt_completion(
+        model=model, chain=chain, template=template, function=function
+    )
+    doc_path = Path("docs") / path.with_suffix(".md")
     doc_path.parent.mkdir(parents=True, exist_ok=True)
-    with open(doc_path, 'a') as f:
-        f.write(f'{documentation}\n\n')
+    with open(doc_path, "a") as f:
+        f.write(f"{documentation}\n\n")
+    return chain
 
 
-def docs(repo_dict, gpt3=False, template=TEMPLATE):
-    """ Parse code for functions and generate documentation for each """
-    if gpt3:
-        model = "gpt-3.5-turbo-16k"
-    else:
-        model = "gpt-4"
+def docs(repo_dict, model, template=TEMPLATE):
+    """Parse code for functions and generate documentation for each"""
+    chain = None
+
+    # remove old docs since we are appending
+    if Path("docs").exists():
+        shutil.rmtree("docs")
 
     for path, content in repo_dict.items():
-        if path.suffix == '.py':
+        if path.suffix == ".py":
             module = ast.parse(content)
-            functions = [ast.unparse(node) for node in module.body if isinstance(node, ast.FunctionDef)]
-            for function in functions:
-                generate_docs(model, template, function, path)
+            functions = [
+                (node, ast.unparse(node))
+                for node in module.body
+                if isinstance(node, ast.FunctionDef)
+            ]
+            for node, function in functions:
+                print(f"Generating docs for {path.stem}.{node.name}")
+                chain = generate_docs(
+                    path, function, model=model, template=template, chain=chain
+                )
