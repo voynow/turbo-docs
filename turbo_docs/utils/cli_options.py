@@ -24,3 +24,11 @@ def gpt3(func: Callable) -> Callable:
         is_flag=True,
         help='Use the GPT-3.5 Turbo model'
     )(func)
+
+def docs(func: Callable) -> Callable:
+    return click.option(
+        '--docs',
+        default=False,
+        is_flag=True,
+        help='Generate documentation for all code files'
+    )(func)
