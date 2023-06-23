@@ -1,73 +1,79 @@
 # Turbo Docs 🚀
 
-Turbo Docs is an expert software development assistant that helps you generate and maintain documentation for your Python projects. It automates the process of creating README.md files and function documentation, making it easy to keep your project documentation up-to-date and consistent.
+![GitHub stars](https://img.shields.io/github/stars/voynow/turbo-docs?style=social)
+![PyPI](https://img.shields.io/pypi/v/turbo_docs)
 
-## Table of Contents
+Turbo Docs is a powerful Python package that automates the generation of documentation for your Python projects. It utilizes OpenAI's GPT models to create concise and informative documentation, making it easier for you and your users to understand your code.
 
-- [Features](#features)
+## 📚 Table of Contents
+
+- [Why Use Turbo Docs?](#why-use-turbo-docs)
+- [Repo Structure](#repo-structure)
 - [Installation](#installation)
 - [Usage](#usage)
-- [Requirements](#requirements)
+- [Examples](#examples)
 - [Contributing](#contributing)
 - [License](#license)
 
-## Features ✨
+## 🎯 Why Use Turbo Docs?
 
-- Generate README.md files for your repositories using GPT-3.5 Turbo or GPT-4 models
-- Automatically create function documentation for your Python code
-- Copy directory text to clipboard for easy integration with ChatGPT
-- Customize templates for generating documentation
-- Easily maintain up-to-date documentation for your projects
+- **Save time**: Turbo Docs automatically generates documentation for your Python functions, so you can focus on writing code.
+- **Stay up-to-date**: Turbo Docs can be easily integrated into your development workflow, ensuring your documentation is always current.
+- **High-quality documentation**: Turbo Docs leverages the power of OpenAI's GPT models to generate concise and informative documentation.
+- **Customizable**: You can choose between GPT-3.5 Turbo and GPT-4 models, and even provide your own templates for generating documentation.
 
-## Installation 💾
+## 🌳 Repo Structure
+
+```
+turbo_docs/
+├── commands/
+│   ├── docs.py
+│   ├── readme.py
+│   └── __init__.py
+├── utils/
+│   ├── cli_options.py
+│   ├── directory.py
+│   ├── openai_api.py
+│   └── __init__.py
+├── generate.py
+├── __init__.py
+├── setup.py
+├── requirements.txt
+└── turbo_docs.toml
+```
+
+## 📦 Installation
 
 To install Turbo Docs, simply run:
 
 ```bash
-pip install turbo-docs
+pip install turbo_docs
 ```
 
-## Usage 🛠️
+## 🛠 Usage
 
-To use Turbo Docs, run the following command in your project directory:
+To generate documentation for your Python project, navigate to your project's root directory and run:
 
 ```bash
-turbo_docs [OPTIONS]
+turbo_docs --docs
 ```
 
-Available options:
-
-- `--copy`: Copy the directory text to clipboard (useful for working with ChatGPT)
-- `--readme`: Generate a README.md file (useful for keeping documentation up-to-date)
-- `--gpt3`: Use the GPT-3.5 Turbo model (useful if you don't have GPT-4 access)
-- `--docs`: Generate documentation for each code file (useful for keeping documentation up-to-date)
-
-Example usage:
+To generate a README.md file for your project, run:
 
 ```bash
-turbo_docs --readme --docs --gpt3
+turbo_docs --readme
 ```
 
-This command will generate a README.md file and create documentation for each code file in the project using gpt-3.5-turbo-16k.
+For more options, run:
 
-## Requirements 📋
+```bash
+turbo_docs --help
+```
 
-Turbo Docs requires the following Python packages:
-
-- requests
-- openai
-- llm-blocks
-- click
-- pyperclip
-- redbaron
-- gitpython
-- toml
-- pathspec
-
-## Contributing 🤝
+## 🤝 Contributing
 
 Contributions are welcome! Please feel free to submit a pull request or open an issue to discuss any improvements or suggestions.
 
-## License 📄
+## 📄 License
 
-Turbo Docs is released under the MIT License. See [LICENSE](LICENSE) for more information.
+Turbo Docs is released under the [MIT License](https://opensource.org/licenses/MIT).
