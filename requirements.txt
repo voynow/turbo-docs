@@ -4,3 +4,4 @@ click
 pyperclip
 toml
 pathspec
+tiktoken

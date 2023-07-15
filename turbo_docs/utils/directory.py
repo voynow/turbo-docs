@@ -11,7 +11,6 @@ def read_text(path: Path) -> str:
             return file.read()
         
     except UnicodeDecodeError:
-        print(f"File {path} contains non-textual content. Add to 'turbo_docs.toml' if this file should be ignored.")
         with open(path, 'r', encoding='utf-8', errors='replace') as file:
             return file.read()
         
@@ -37,6 +36,7 @@ def get_repo_text_dict():
     if not Path("turbo_docs.toml").exists():
         ignored_patterns = []
         print("Warning: 'turbo_docs.toml' not found. All files will be included.")
+        print("See https://github.com/voynow/turbo-docs/blob/main/turbo_docs.toml for an example.")
     else:
         config = toml.load("turbo_docs.toml")
         ignored_patterns = config.get("ignore", [])
