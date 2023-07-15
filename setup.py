@@ -2,15 +2,12 @@ from setuptools import setup, find_packages
 
 setup(
 	name="turbo_docs",
-	version="1.0.2",
+	version="1.0.3",
 	packages=find_packages(),
 	install_requires=[
-		"requests",
 		"openai",
 		"click",
 		"pyperclip",
-		"redbaron",
-		"gitpython",
     	"toml",
         "pathspec",
         "llm-blocks",

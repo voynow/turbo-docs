@@ -54,7 +54,8 @@ def driver(
     dir_text_dict = directory.get_repo_text_dict()
 
     if readme:
-        del dir_text_dict[Path("README.md")]
+        if Path("README.md") in dir_text_dict:
+            del dir_text_dict[Path("README.md")]
         dir_text_str = directory.convert_dict_to_string(dir_text_dict)
         model = resolve_model(gpt3)
         readme_module.readme(dir_text_str, model)
