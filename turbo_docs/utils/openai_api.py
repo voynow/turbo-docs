@@ -18,7 +18,7 @@ def gpt_completion(template, model="gpt-4", chain=None, **inputs):
 			model_name=model
 		)
 	try:
-		resp = chain(inputs)['text']
+		resp = chain(inputs)
 	except openai.error.InvalidRequestError as e:
 		raise ValueError(f"Caught OpenAI API error: {e}")
 	return resp, chain
