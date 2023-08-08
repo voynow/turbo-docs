@@ -31,16 +31,40 @@ def collect_text_from_files(dir_path: Path, pathspec: PathSpec) -> dict:
     return result
 
 
+def create_default_config(toml_path):
+    """Create a turbo_docs.toml with default ignore patterns"""
+    print("No turbo_docs.toml configuration file found. Creating a default one.")
+    default_config = {
+        "ignore": [
+            "turbo_docs.toml",
+            "__pycache__",
+            "venv",
+            "build",
+            "dist",
+            "*.egg-info",
+            ".git",
+        ]
+    }
+    with open(toml_path, "w") as toml_file:
+        toml.dump(default_config, toml_file)    
+
+
 def get_repo_text_dict():
     """Return a dictionary of all text in the current repo"""
-    if not Path("turbo_docs.toml").exists():
-        ignored_patterns = []
-        print("Warning: 'turbo_docs.toml' not found. All files will be included.")
-        print("See https://github.com/voynow/turbo-docs/blob/main/turbo_docs.toml for an example.")
-    else:
-        config = toml.load("turbo_docs.toml")
-        ignored_patterns = config.get("ignore", [])
+    toml_path = Path("turbo_docs.toml")
 
+    # create default and load config
+    if not toml_path.exists():
+        create_default_config(toml_path)
+    config = toml.load(toml_path)
+
+    # create default if ignore not in config and reload
+    if "ignore" not in config:
+        create_default_config(toml_path)
+        config = toml.load(toml_path)
+
+    ignored_patterns = config.get("ignore", [])
+    print(f"Ignoring the following patterns: {ignored_patterns}")
     pathspec = PathSpec.from_lines(GitWildMatchPattern, ignored_patterns)
     return collect_text_from_files(Path("."), pathspec)
 
