@@ -1,31 +1,18 @@
-# Turbo Docs 🚀
+# Turbo-Docs 🚀
 
 ![GitHub stars](https://img.shields.io/github/stars/voynow/turbo-docs?style=social)
-![PyPI](https://img.shields.io/pypi/v/turbo_docs)
+![PyPI](https://img.shields.io/pypi/v/turbo-docs)
 
-Turbo Docs is a powerful Python package that automates the generation of documentation for your Python projects. It utilizes OpenAI's GPT models to create concise and informative documentation, making it easier for you and your users to understand your code.
+Turbo-Docs is a powerful tool for developers that automates the process of generating documentation for your Python projects. It leverages the power of OpenAI's GPT-3.5 Turbo and GPT-4 models to create concise, accurate, and cohesive documentation for your functions and classes. 
 
-## 📚 Table of Contents
+## Why Use Turbo-Docs? 🤔
 
-- [Why Use Turbo Docs?](#why-use-turbo-docs)
-- [Repo Structure](#repo-structure)
-- [Installation](#installation)
-- [Usage](#usage)
-- [Examples](#examples)
-- [Contributing](#contributing)
-- [License](#license)
+Writing documentation can be a tedious and time-consuming task. Turbo-Docs simplifies this process by automatically generating documentation for your Python code. It uses advanced AI models to understand your code and generate human-like text that accurately describes what your functions and classes do. This not only saves you time but also ensures that your documentation is always up-to-date with your code.
 
-## 🎯 Why Use Turbo Docs?
-
-- **Save time**: Turbo Docs automatically generates documentation for your Python functions, so you can focus on writing code.
-- **Stay up-to-date**: Turbo Docs can be easily integrated into your development workflow, ensuring your documentation is always current.
-- **High-quality documentation**: Turbo Docs leverages the power of OpenAI's GPT models to generate concise and informative documentation.
-- **Customizable**: You can choose between GPT-3.5 Turbo and GPT-4 models, and even provide your own templates for generating documentation.
-
-## 🌳 Repo Structure
+## Repo Structure 🌳
 
 ```
-turbo_docs/
+turbo-docs/
 ├── commands/
 │   ├── docs.py
 │   ├── readme.py
@@ -36,44 +23,36 @@ turbo_docs/
 │   ├── openai_api.py
 │   └── __init__.py
 ├── generate.py
-├── __init__.py
 ├── setup.py
-├── requirements.txt
-└── turbo_docs.toml
+└── __init__.py
 ```
 
-## 📦 Installation
+## Example Usage 📖
 
-To install Turbo Docs, simply run:
+- `--readme`: This is the main feature of Turbo-Docs. It generates a README.md file for your project using the provided template and saves the result in a new README.md file.
+
+- `--docs`: This feature generates documentation for all code files in your project, providing a convenient way to keep your documentation up-to-date.
+
+- `--gpt3`: This feature enables the use of the GPT-3.5 Turbo model for generating documentation. It's a great option if you don't have access to the GPT-4 model.
+
+- `--copy`: This feature copies the directory text to the clipboard, making it easy to share your project's structure and contents.
+
+- `--narrative`: This feature allows you to provide a narrative to guide the tone and content of the README. It's a great way to personalize your documentation and make it more engaging for your users.
+
+## Installation 📥
+
+You can install Turbo-Docs using pip:
 
 ```bash
-pip install turbo_docs
+pip install turbo-docs
 ```
 
-## 🛠 Usage
+Please note that you'll need to have Python 3.6 or later installed on your machine to use Turbo-Docs.
 
-To generate documentation for your Python project, navigate to your project's root directory and run:
+## Conclusion 🎉
 
-```bash
-turbo_docs --docs
-```
+Turbo-Docs is a powerful tool that can save you a lot of time and effort when it comes to documenting your Python projects. Give it a try and see how it can improve your workflow!
 
-To generate a README.md file for your project, run:
+## License 📄
 
-```bash
-turbo_docs --readme
-```
-
-For more options, run:
-
-```bash
-turbo_docs --help
-```
-
-## 🤝 Contributing
-
-Contributions are welcome! Please feel free to submit a pull request or open an issue to discuss any improvements or suggestions.
-
-## 📄 License
-
-Turbo Docs is released under the [MIT License](https://opensource.org/licenses/MIT).
+This project is licensed under the MIT License.
