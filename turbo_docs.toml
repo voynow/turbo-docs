@@ -6,8 +6,5 @@ ignore = [
     "dist",
     "*.egg-info",
     ".git",
-    "directory.py",
-    "docs.py",
-    "setup.py",
     "requirements.txt",
 ]

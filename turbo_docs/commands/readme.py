@@ -21,7 +21,7 @@ def readme(repo, model, template=TEMPLATE, narrative=""):
     from turbo_docs.utils import openai_api
 
     if narrative:
-        template = f"{narrative}\n\n{template}"
+        template = f"Narritive for your task:\n{narrative}\n\n{template}"
 
     readme = "README.md"
     response, _ = openai_api.gpt_completion(template, model, repo=repo)
