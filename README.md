@@ -1,6 +1,6 @@
-# Turbo Docs
+# Turbo Docs 📚
 
-![GitHub stars](https://img.shields.io/github/stars/your_username/repo_name?style=social)
+![GitHub stars](https://img.shields.io/github/stars/voynow/turbo-docs?style=social)
 ![PyPI version](https://badge.fury.io/py/turbo-docs.svg)
 
 Turbo Docs es una herramienta de documentación de software que utiliza modelos de lenguaje GPT para generar automáticamente documentación para su código Python. 
