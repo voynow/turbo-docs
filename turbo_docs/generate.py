@@ -30,11 +30,13 @@ def num_tokens_from_string(string: str, encoding_name: str = "cl100k_base") -> i
 @cli_options.readme
 @cli_options.gpt3
 @cli_options.docs
+@cli_options.narrative
 def driver(
     copy: bool,
     readme: bool,
     gpt3: bool,
     docs: bool,
+    narrative: str,
 ) -> None:
     """
     Pull text from all files in the current directory and apply the following commands:
@@ -58,7 +60,7 @@ def driver(
             del dir_text_dict[Path("README.md")]
         dir_text_str = directory.convert_dict_to_string(dir_text_dict)
         model = resolve_model(gpt3)
-        readme_module.readme(dir_text_str, model)
+        readme_module.readme(dir_text_str, model, narrative=narrative)
         print("Generated README.md")
 
     if docs:

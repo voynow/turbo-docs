@@ -13,12 +13,15 @@ Here are the requirements for the README.md:
 - emoji are encouraged. One for each section at minimum.
 """
 
-def readme(repo, model, template=TEMPLATE):
+def readme(repo, model, template=TEMPLATE, narrative=""):
     """
     Chose between GPT-3.5 Turbo and GPT-4, allow for template override, and
     generate a README.md file for the current repo.
     """
     from turbo_docs.utils import openai_api
+
+    if narrative:
+        template = f"{narrative}\n\n{template}"
 
     readme = "README.md"
     response, _ = openai_api.gpt_completion(template, model, repo=repo)

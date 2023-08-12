@@ -17,6 +17,14 @@ def readme(func: Callable) -> Callable:
         help='Generate README.md file'
     )(func)
 
+def narrative(func: Callable) -> Callable:
+    return click.option(
+        '--narrative',
+        default="",
+        type=str,
+        help='Provide a narrative to guide the tone and content of the README'
+    )(func)
+
 def gpt3(func: Callable) -> Callable:
     return click.option(
         '--gpt3',
