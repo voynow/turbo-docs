@@ -1,58 +1,85 @@
 # Turbo-Docs 🚀
 
 ![GitHub stars](https://img.shields.io/github/stars/voynow/turbo-docs?style=social)
-![PyPI](https://img.shields.io/pypi/v/turbo-docs)
+![PyPI](https://img.shields.io/pypi/v/turbo_docs)
 
-Turbo-Docs is a powerful tool for developers that automates the process of generating documentation for your Python projects. It leverages the power of OpenAI's GPT-3.5 Turbo and GPT-4 models to create concise, accurate, and cohesive documentation for your functions and classes. 
+Turbo Docs is a Python package designed to automate the process of generating documentation for your codebase. It uses the OpenAI API to generate documentation and README files, making it easier to maintain up-to-date and comprehensive documentation for your projects.
 
 ## Why Use Turbo-Docs? 🤔
 
-Writing documentation can be a tedious and time-consuming task. Turbo-Docs simplifies this process by automatically generating documentation for your Python code. It uses advanced AI models to understand your code and generate human-like text that accurately describes what your functions and classes do. This not only saves you time but also ensures that your documentation is always up-to-date with your code.
+Keeping documentation up-to-date can be a tedious task, especially for large codebases. Turbo Docs automates this process, ensuring that your documentation is always in sync with your code. It uses advanced AI models to generate human-like text, providing high-quality documentation that is easy to understand. 
 
 ## Repo Structure 🌳
 
 ```
-turbo-docs/
-├── commands/
-│   ├── docs.py
-│   ├── readme.py
-│   └── __init__.py
-├── utils/
-│   ├── cli_options.py
-│   ├── directory.py
-│   ├── openai_api.py
-│   └── __init__.py
-├── generate.py
+.
+├── .gitignore
 ├── setup.py
-└── __init__.py
+├── turbo_docs
+│   ├── __init__.py
+│   ├── commands
+│   │   ├── __init__.py
+│   │   ├── docs.py
+│   │   └── readme.py
+│   ├── generate.py
+│   └── utils
+│       ├── __init__.py
+│       ├── cli_options.py
+│       ├── directory.py
+│       └── openai_api.py
+└── docs
+    ├── turbo_docs
+    │   ├── commands
+    │   │   ├── docs.md
+    │   │   └── readme.md
+    │   ├── generate.md
+    │   └── utils
+    │       ├── cli_options.md
+    │       ├── directory.md
+    │       └── openai_api.md
 ```
 
 ## Example Usage 📖
 
-- `--readme`: This is the main feature of Turbo-Docs. It generates a README.md file for your project using the provided template and saves the result in a new README.md file.
+Generate a README.md file for the current repo:
+```bash
+turbo_docs --readme
+```
 
-- `--docs`: This feature generates documentation for all code files in your project, providing a convenient way to keep your documentation up-to-date.
+Generate documentation for all code files:
+```bash
+turbo_docs --docs
+```
 
-- `--gpt3`: This feature enables the use of the GPT-3.5 Turbo model for generating documentation. It's a great option if you don't have access to the GPT-4 model.
+Use the GPT-3.5 Turbo model:
+```bash
+turbo_docs --gpt3
+```
 
-- `--copy`: This feature copies the directory text to the clipboard, making it easy to share your project's structure and contents.
+Copy the directory text to clipboard:
+```bash
+turbo_docs --copy
+```
 
-- `--narrative`: This feature allows you to provide a narrative to guide the tone and content of the README. It's a great way to personalize your documentation and make it more engaging for your users.
+Provide a narrative to guide the tone and content of the README:
+```bash
+turbo_docs --narrative "Your narrative here"
+```
 
 ## Installation 📥
 
-You can install Turbo-Docs using pip:
+You can install Turbo Docs via pip:
 
 ```bash
-pip install turbo-docs
+pip install turbo_docs
 ```
 
-Please note that you'll need to have Python 3.6 or later installed on your machine to use Turbo-Docs.
+## Contributing
 
-## Conclusion 🎉
+Contributions are welcome! Please feel free to submit a Pull Request.
 
-Turbo-Docs is a powerful tool that can save you a lot of time and effort when it comes to documenting your Python projects. Give it a try and see how it can improve your workflow!
+## Contact
 
-## License 📄
+If you have any questions or feedback, please feel free to contact us.
 
-This project is licensed under the MIT License.
+Happy coding! :computer: :rocket:

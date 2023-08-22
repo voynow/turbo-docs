@@ -6,14 +6,14 @@ if not os.environ.get("OPENAI_API_KEY"):
 	print("If you have not done so already, create an OpenAI account at https://platform.openai.com/overview.")
 	os.environ['OPENAI_API_KEY'] = input("Secret key: ")
 
-from llm_blocks import chat_utils
+from llm_blocks import blocks
 
 
 def gpt_completion(template, model="gpt-4", chain=None, **inputs):
 	"""Generic chat wrapper over the OpenAI API"""
 
 	if chain is None:
-		chain = chat_utils.GenericChain(
+		chain = blocks.TemplateBlock(
 			template=template, 
 			model_name=model
 		)
