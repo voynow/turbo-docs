@@ -1,16 +1,20 @@
 ## function: copy
 #### args: func
-This function takes a callable as input and returns a new callable with an added `--copy` option. The `--copy` option, when set to True, enables copying the directory text to the clipboard. This is useful for quickly sharing directory contents without manually copying them.
+The `copy` function is a decorator that adds a command line option `--copy` to the function it decorates. When this option is used, it copies the directory text to the clipboard. This function is useful when you want to quickly copy the output of a command line tool without having to manually select and copy the text.
 
 ## function: readme
 #### args: func
-The readme function takes a callable function as input and returns a new function wrapped with a click.option decorator. This decorator adds a command line option '--readme' to the input function, allowing users to generate a README.md file when the option is enabled.
+The readme function is a decorator that adds a command line option '--readme' to the function it decorates. When the '--readme' option is used, it triggers the generation of a README.md file. This function is useful for automating the creation of README files in your projects.
+
+## function: narrative
+#### args: func
+The `narrative` function is a decorator that adds a command line option to the function it decorates. This option allows the user to provide a narrative that can guide the tone and content of the README file. This is particularly useful when you want to customize the README generation process based on specific requirements or guidelines.
 
 ## function: gpt3
 #### args: func
-The gpt3 function is a decorator that adds a command line option '--gpt3' to the given callable function, enabling the use of GPT-3.5 Turbo model when the flag is set. It simplifies the integration of GPT-3.5 Turbo into your application by handling the command line option for you. <end>
+The gpt3 function is a decorator that adds a command line option to the function it decorates. This option allows the user to specify whether to use the GPT-3.5 Turbo model or not. It's a convenient way to switch between different models without changing the code.
 
 ## function: docs
 #### args: func
-This function takes a callable function as input and returns a modified version of the function with an added command line option '--docs'. This option, when used, generates documentation for all code files in the project, providing a convenient way to keep documentation up-to-date.
+The `docs` function is a decorator that adds a command line option `--docs` to the function it decorates. When the `--docs` flag is set to True, it triggers the generation of documentation for all code files. This function is particularly useful for automating the documentation process in a codebase.
 
