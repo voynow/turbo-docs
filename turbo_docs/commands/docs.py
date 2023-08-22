@@ -11,7 +11,7 @@ The documentation must following the following format:
 Insert description of the function here
 <end>
 
-In your description, describe the function in english as concisely as possible in at least one sentence but less than four sentences. Subtly describe the usefule/counterintuitive aspects of the function. Do not list arguments. Do not give code examples. Minimize tokens at all costs.
+In your description, describe the function in english in at least one sentence but less than four sentences. Subtly describe the usefule/counterintuitive aspects of the function. Do not list arguments. Do not give code examples.
 
 Here is the function:
 {function}
