@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
 	name="turbo_docs",
-	version="1.0.10",
+	version="1.0.12",
 	packages=find_packages(),
 	install_requires=[
 		"openai",
@@ -10,7 +10,7 @@ setup(
 		"pyperclip",
     	"toml",
         "pathspec",
-        "llm-blocks",
+        "llm-blocks==0.3.5",
         "tiktoken"
 	],
 	entry_points={

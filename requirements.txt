@@ -1,5 +1,5 @@
 openai
-llm-blocks==0.3.3
+llm-blocks==0.3.5
 click
 pyperclip
 toml

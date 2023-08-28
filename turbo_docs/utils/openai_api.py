@@ -6,19 +6,20 @@ if not os.environ.get("OPENAI_API_KEY"):
 	print("If you have not done so already, create an OpenAI account at https://platform.openai.com/overview.")
 	os.environ['OPENAI_API_KEY'] = input("Secret key: ")
 
-from llm_blocks import blocks
+from llm_blocks import block_factory
 
 
 def gpt_completion(template, model="gpt-4", chain=None, **inputs):
 	"""Generic chat wrapper over the OpenAI API"""
 
 	if chain is None:
-		chain = blocks.TemplateBlock(
+		template_block = block_factory.get(
+			type="template", 
 			template=template, 
 			model_name=model
 		)
 	try:
-		resp = chain(inputs)
+		resp = template_block(inputs)
 	except openai.error.InvalidRequestError as e:
 		raise ValueError(f"Caught OpenAI API error: {e}")
 	return resp, chain
