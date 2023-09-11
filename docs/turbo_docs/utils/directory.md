@@ -1,6 +1,6 @@
 ## function: read_text
 #### args: path
-The `read_text` function reads a text file from a given path and returns its content as a string. It assumes that all non-textual files are in the turbo_docs.toml ignore list. If the file cannot be read due to a UnicodeDecodeError, it tries to read the file again with UTF-8 encoding, replacing any errors. If any other exception occurs, it raises the exception.
+The `read_text` function reads a text file from a given path and returns its content as a string. It assumes that all non-textual files are in the pyproject.toml ignore list. If the file cannot be read due to a UnicodeDecodeError, it tries to read the file again with UTF-8 encoding, replacing any errors. If any other exception occurs, it raises the exception.
 
 ## function: collect_text_from_files
 #### args: dir_path, pathspec
@@ -8,7 +8,7 @@ The function `collect_text_from_files` is designed to recursively collect text f
 
 ## function: create_default_config
 #### args: toml_path
-The function `create_default_config` is used to create a default configuration file named 'turbo_docs.toml' with predefined ignore patterns. If the configuration file is not found, it prints a message and creates a new one at the specified path. The function is particularly useful in setting up a new project or resetting the configuration to its default state.
+The function `create_default_config` is used to create a default configuration file named 'pyproject.toml' with predefined ignore patterns. If the configuration file is not found, it prints a message and creates a new one at the specified path. The function is particularly useful in setting up a new project or resetting the configuration to its default state.
 
 ## function: get_repo_text_dict
 #### args: None
