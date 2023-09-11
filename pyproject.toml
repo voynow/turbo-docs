@@ -1,10 +1,11 @@
+[tool.turbo_docs]
 ignore = [
-    "turbo_docs.toml",
+    "pyproject.toml",
     "__pycache__",
     "venv",
     "build",
     "dist",
     "*.egg-info",
     ".git",
-    "requirements.txt",
+    ".env",
 ]
