@@ -13,7 +13,7 @@ def resolve_model(gpt3):
     if gpt3:
         model = "gpt-3.5-turbo-16k"
     else:
-        model = "gpt-4"
+        model = "gpt-4-1106-preview"
         print(
             "Warning: This model is under limited beta access and is not available to all users."
         )
@@ -35,6 +35,8 @@ def generate_readme(dir_text_dict: dict, gpt3: bool, narrative: str) -> None:
         del dir_text_dict[Path("README.md")]
     dir_text_str = directory.convert_dict_to_string(dir_text_dict)
     model = resolve_model(gpt3)
+    num_tokens = num_tokens_from_string(dir_text_str)
+    print(f"Generating README.md. Using {num_tokens} tokens.")
     readme_module.readme(dir_text_str, model, narrative=narrative)
     print("Generated README.md")
 
@@ -48,8 +50,9 @@ def generate_docs(dir_text_dict: dict, gpt3: bool) -> None:
 def copy_text_to_clipboard(dir_text_dict: dict) -> None:
     dir_text_str = directory.convert_dict_to_string(dir_text_dict)
     num_tokens = num_tokens_from_string(dir_text_str)
+    print(f"Copying directory to clipboard. Using {num_tokens} tokens.")
     pyperclip.copy(dir_text_str)
-    print(f"Directory text copied to clipboard containing {num_tokens} tokens")
+    print("Copied directory text to clipboard")
 
 
 @click.command()
