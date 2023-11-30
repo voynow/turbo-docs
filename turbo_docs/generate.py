@@ -1,10 +1,13 @@
-import click
 from pathlib import Path
+
+import click
 import pyperclip
 import tiktoken
-from turbo_docs.commands import readme as readme_module
+
 from turbo_docs.commands import docs as docs_module
-from turbo_docs.utils import directory, cli_options
+from turbo_docs.commands import readme as readme_module
+from turbo_docs.utils import cli_options, directory
+
 
 def resolve_model(gpt3):
     if gpt3:
@@ -19,11 +22,35 @@ def resolve_model(gpt3):
     print(f"Using model: {model}")
     return model
 
+
 def num_tokens_from_string(string: str, encoding_name: str = "cl100k_base") -> int:
     """Returns the number of tokens in a text string."""
     encoding = tiktoken.get_encoding(encoding_name)
     num_tokens = len(encoding.encode(string, allowed_special="all"))
     return num_tokens
+
+
+def generate_readme(dir_text_dict: dict, gpt3: bool, narrative: str) -> None:
+    if Path("README.md") in dir_text_dict:
+        del dir_text_dict[Path("README.md")]
+    dir_text_str = directory.convert_dict_to_string(dir_text_dict)
+    model = resolve_model(gpt3)
+    readme_module.readme(dir_text_str, model, narrative=narrative)
+    print("Generated README.md")
+
+
+def generate_docs(dir_text_dict: dict, gpt3: bool) -> None:
+    model = resolve_model(gpt3)
+    docs_module.docs(dir_text_dict, model)
+    print("Generated documentation")
+
+
+def copy_text_to_clipboard(dir_text_dict: dict) -> None:
+    dir_text_str = directory.convert_dict_to_string(dir_text_dict)
+    num_tokens = num_tokens_from_string(dir_text_str)
+    pyperclip.copy(dir_text_str)
+    print(f"Directory text copied to clipboard containing {num_tokens} tokens")
+
 
 @click.command()
 @cli_options.copy
@@ -56,20 +83,10 @@ def driver(
     dir_text_dict = directory.get_repo_text_dict()
 
     if readme:
-        if Path("README.md") in dir_text_dict:
-            del dir_text_dict[Path("README.md")]
-        dir_text_str = directory.convert_dict_to_string(dir_text_dict)
-        model = resolve_model(gpt3)
-        readme_module.readme(dir_text_str, model, narrative=narrative)
-        print("Generated README.md")
+        generate_readme(dir_text_dict, gpt3, narrative)
 
     if docs:
-        model = resolve_model(gpt3)
-        docs_module.docs(dir_text_dict, model)
-        print("Generated documentation")
+        generate_docs(dir_text_dict, gpt3)
 
     if copy:
-        dir_text_str = directory.convert_dict_to_string(dir_text_dict)
-        num_tokens = num_tokens_from_string(dir_text_str)
-        pyperclip.copy(dir_text_str)
-        print(f"Directory text copied to clipboard containing {num_tokens} tokens")
+        copy_text_to_clipboard(dir_text_dict)
