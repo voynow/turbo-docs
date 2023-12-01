@@ -34,7 +34,6 @@ def driver(
         if Path("README.md") in dir_text_dict:
             del dir_text_dict[Path("README.md")]
         dir_text_str = directory.convert_dict_to_string(dir_text_dict)
-        print(dir_text_str)
         readme_module.readme(dir_text_str)
         print("Generated README.md")
 
