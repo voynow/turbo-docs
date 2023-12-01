@@ -13,7 +13,7 @@ Here are some recommendations for the README.md:
 """
 
 
-def readme(repo, model, template=TEMPLATE):
+def readme(repo, template=TEMPLATE):
     """
     Chose between GPT-3.5 Turbo and GPT-4, allow for template override, and
     generate a README.md file for the current repo.
@@ -21,7 +21,7 @@ def readme(repo, model, template=TEMPLATE):
     from turbo_docs.utils import openai_api
 
     readme = "README.md"
-    response, _ = openai_api.gpt_completion(template, model, repo=repo)
+    response, _ = openai_api.gpt_completion(template, repo=repo)
 
     with open(readme, "w", encoding="utf-8") as readme_file:
         readme_file.write(response)
