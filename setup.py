@@ -1,16 +1,15 @@
-from setuptools import setup, find_packages
+from setuptools import find_packages, setup
 
 setup(
     name="turbo_docs",
-    version="1.0.14",
+    version="1.1.1",
     packages=find_packages(),
     install_requires=[
-        "openai",
+        "openai>=1.3.6",
         "click",
         "pyperclip",
         "toml",
         "pathspec",
-        "llm-blocks",
         "tiktoken",
     ],
     entry_points={
