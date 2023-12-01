@@ -1,5 +1,6 @@
-import click
 from typing import Callable
+
+import click
 
 
 def copy(func: Callable) -> Callable:
@@ -14,15 +15,6 @@ def copy(func: Callable) -> Callable:
 def readme(func: Callable) -> Callable:
     return click.option(
         "--readme", default=False, is_flag=True, help="Generate README.md file"
-    )(func)
-
-
-def narrative(func: Callable) -> Callable:
-    return click.option(
-        "--narrative",
-        default="",
-        type=str,
-        help="Provide a narrative to guide the tone and content of the README",
     )(func)
 
 

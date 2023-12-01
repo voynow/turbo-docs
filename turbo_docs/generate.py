@@ -1,9 +1,11 @@
-import click
 from pathlib import Path
+
+import click
 import pyperclip
 import tiktoken
+
 from turbo_docs.commands import readme as readme_module
-from turbo_docs.utils import directory, cli_options
+from turbo_docs.utils import cli_options, directory
 
 
 def resolve_model(gpt3):
@@ -31,12 +33,10 @@ def num_tokens_from_string(string: str, encoding_name: str = "cl100k_base") -> i
 @cli_options.copy
 @cli_options.readme
 @cli_options.gpt3
-@cli_options.narrative
 def driver(
     copy: bool,
     readme: bool,
     gpt3: bool,
-    narrative: str,
 ) -> None:
     """
     Pull text from all files in the current directory and apply the following commands:
@@ -57,7 +57,7 @@ def driver(
             del dir_text_dict[Path("README.md")]
         dir_text_str = directory.convert_dict_to_string(dir_text_dict)
         model = resolve_model(gpt3)
-        readme_module.readme(dir_text_str, model, narrative=narrative)
+        readme_module.readme(dir_text_str, model)
         print("Generated README.md")
 
     if copy:

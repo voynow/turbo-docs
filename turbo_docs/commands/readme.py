@@ -1,4 +1,3 @@
-
 TEMPLATE = """
 "You are an expert software developement assistant. Write a README.md for the following repo:
 {repo}
@@ -13,18 +12,16 @@ Here are some recommendations for the README.md:
 - emoji are encouraged. One for each section at minimum.
 """
 
-def readme(repo, model, template=TEMPLATE, narrative=""):
+
+def readme(repo, model, template=TEMPLATE):
     """
     Chose between GPT-3.5 Turbo and GPT-4, allow for template override, and
     generate a README.md file for the current repo.
     """
     from turbo_docs.utils import openai_api
 
-    if narrative:
-        template = f"{template}\n\nHere is your narritive. Follow this instruction at all costs):\n{narrative}"
-
     readme = "README.md"
     response, _ = openai_api.gpt_completion(template, model, repo=repo)
-    
+
     with open(readme, "w", encoding="utf-8") as readme_file:
         readme_file.write(response)
