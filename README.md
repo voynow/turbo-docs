@@ -1,84 +1,85 @@
-# Turbo Docs
+# Turbo Docs 🚀
 
-![GitHub stars](https://img.shields.io/github/stars/voynow/turbo-docs?style=social)
-![PyPI](https://img.shields.io/pypi/v/turbo_docs)
+Welcome to Turbo Docs, the cutting-edge documentation generator that empowers developers to create beautiful README files and manage their documentation with ease. Whether you're a user looking to generate your project's documentation, or a contributor aiming to enhance this tool, Turbo Docs is crafted to elevate your project's visibility and collaboration to the next level.
 
-Turbo Docs is a powerful command-line interface (CLI) tool designed to automate the generation of documentation for your Python projects. It leverages the capabilities of OpenAI's GPT-4 model to generate comprehensive and accurate documentation for your codebase. 
+## Table of Contents 📑
 
-## Why Use Turbo Docs? 🚀
+- [Installation](#installation)
+- [Usage](#usage)
+  - [Commands](#commands)
+- [Features](#features)
+- [Contributing](#contributing)
+- [License](#license)
+- [Acknowledgements](#acknowledgements)
 
-Turbo Docs is not just another documentation tool. It's your personal documentation assistant that understands your code and generates meaningful and concise documentation. It's perfect for developers who want to focus more on coding and less on writing documentation. 
+## Installation 🛠️
 
-## Repo Structure 📂
+Before you can start using Turbo Docs, ensure you have Python installed on your system. Turbo Docs is compatible with Python 3.6 and above.
 
-```
-turbo_docs
-├── commands
-│   ├── docs.py
-│   ├── readme.py
-│   └── __init__.py
-├── utils
-│   ├── cli_options.py
-│   ├── directory.py
-│   ├── openai_api.py
-│   └── __init__.py
-├── generate.py
-├── __init__.py
-├── setup.py
-└── requirements.txt
-```
-
-## Example Usage 💻
+To install Turbo Docs, simply clone the repo and install the required packages listed in `requirements.txt` by running the following commands:
 
 ```bash
-# Generate a README.md file for your current repository
-turbo_docs --readme
-
-# Generate documentation for all Python files in your current repository
-turbo_docs --docs
-
-# Copy the text from all files in your current directory to clipboard
-turbo_docs --copy
-```
-
-## Installation 📦
-
-Turbo Docs can be installed via pip:
-
-```bash
-pip install turbo_docs
-```
-
-## Requirements 📄
-
-Turbo Docs requires the following Python packages:
-
-- openai
-- llm-blocks
-- click
-- pyperclip
-- toml
-- pathspec
-- tiktoken
-
-These can be installed from the `requirements.txt` file:
-
-```bash
+git clone https://github.com/voynow/turbo-docs.git
+cd turbo_docs
 pip install -r requirements.txt
 ```
 
+Alternatively, you can install Turbo Docs directly via `pip` with:
+
+```bash
+pip install turbo-docs
+```
+
+## Usage ⚙️
+
+Turbo Docs is designed with a simple command-line interface, making it a breeze to generate your README or copy documentation to your clipboard.
+
+### Commands
+
+- **Generate README:**
+  To generate a `README.md` file, navigate to your project directory and run:
+  ```bash
+  turbo_docs --readme
+  ```
+  This command will generate a `README.md` file based on the contents of your current directory, excluding files specified in the `.gitignore`.
+
+- **Copy to Clipboard:**
+  If you want to copy the contents of your current directory's documentation to the clipboard, use:
+  ```bash
+  turbo_docs --copy
+  ```
+  The text will be copied to the clipboard, and the number of tokens in the text will be displayed.
+
+## Features ✨
+
+- Markdown generation for `README.md` powered by OpenAI's language models
+- Clipboard support for easy text manipulation
+- Exclusion patterns to prevent certain files from being included in the documentation (supports `.gitignore` patterns)
+- Command-line interface for straightforward usage
+
 ## Contributing 🤝
 
-Contributions are welcome! Please feel free to submit a Pull Request.
+Contributions are what make the open-source community such a fantastic place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
 
-## License 📝
+To contribute to Turbo Docs:
+1. Fork the Project
+2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the Branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
 
-Turbo Docs is licensed under the MIT License. See `LICENSE` for more information.
+Please make sure to update tests as appropriate.
 
-## Contact 📧
+## License 📜
 
-For any questions or concerns, please open an issue on GitHub.
+Distributed under the MIT License. See `LICENSE` for more information.
 
-## Final Words 🎉
+## Acknowledgements 🎉
 
-Turbo Docs is here to make your life as a developer easier. Give it a try and let it handle the tedious task of documentation for you. Happy coding!
+- OpenAI for the language models that power the documentation generation
+- The Python community for the invaluable libraries used in this project
+
+---
+
+Give your projects a boost with Turbo Docs and take your documentation to the next level! 🌟
+
