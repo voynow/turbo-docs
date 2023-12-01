@@ -21,7 +21,7 @@ def readme(repo, template=TEMPLATE):
     from turbo_docs.utils import openai_api
 
     readme = "README.md"
-    response, _ = openai_api.gpt_completion(template, repo=repo)
+    response = openai_api.gpt_completion(repo)
 
     with open(readme, "w", encoding="utf-8") as readme_file:
         readme_file.write(response)
