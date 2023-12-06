@@ -1,7 +1,0 @@
-openai
-llm-blocks
-click
-pyperclip
-toml
-pathspec
-tiktoken
