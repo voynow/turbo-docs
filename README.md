@@ -4,30 +4,37 @@ Welcome to Turbo Docs, the cutting-edge documentation generator that empowers de
 
 ## Table of Contents 📑
 
-- [Installation](#installation)
-- [Usage](#usage)
-  - [Commands](#commands)
-- [Features](#features)
-- [Contributing](#contributing)
-- [License](#license)
-- [Acknowledgements](#acknowledgements)
+- [Turbo Docs 🚀](#turbo-docs-)
+  - [Table of Contents 📑](#table-of-contents-)
+  - [Installation 🛠️](#installation-️)
+  - [Usage ⚙️](#usage-️)
+    - [Commands](#commands)
+  - [Features ✨](#features-)
+  - [Contributing 🤝](#contributing-)
+  - [License 📜](#license-)
+  - [Acknowledgements 🎉](#acknowledgements-)
 
 ## Installation 🛠️
 
 Before you can start using Turbo Docs, ensure you have Python installed on your system. Turbo Docs is compatible with Python 3.6 and above.
 
-To install Turbo Docs, simply clone the repo and install the required packages listed in `requirements.txt` by running the following commands:
-
-```bash
-git clone https://github.com/voynow/turbo-docs.git
-cd turbo_docs
-pip install -r requirements.txt
-```
-
-Alternatively, you can install Turbo Docs directly via `pip` with:
+You can install the latest release version from pypi:
 
 ```bash
 pip install turbo-docs
+```
+
+Install it directly for GitHub (not recommended) but sometimes useful:
+
+```bash
+pip install "git+https://github.com/voynow/turbo-docs.git"
+```
+
+Or clone the repository for local development:
+
+```bash
+git clone https://github.com/voynow/turbo-docs.git
+poetry install --all-extras
 ```
 
 ## Usage ⚙️
