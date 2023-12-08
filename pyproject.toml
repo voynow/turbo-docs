@@ -1,8 +1,8 @@
 [tool.poetry]
 name = "turbo-docs"
-version = "0.1.0"
+version = "1.1.3"
 description = "GPT-powered command line interface for generating documentation"
-authors = ["Your Name <you@example.com>"]
+authors = ["Jamie Voynow <voynow99@gmail.com>"]
 license = "MIT"
 readme = "README.md"
 
@@ -19,7 +19,6 @@ classifiers = [
 [tool.poetry.dependencies]
 python = ">=3.8"
 openai = "^1.3.7"
-llm-blocks = "^0.3.7"
 click = "^8.1.7"
 pyperclip = "^1.8.2"
 toml = "^0.10.2"
@@ -44,4 +43,5 @@ ignore = [
     "*.egg-info",
     ".git",
     ".env",
+    "poetry.lock",
 ]
