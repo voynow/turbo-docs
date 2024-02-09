@@ -23,8 +23,6 @@ def driver(
     readme: bool,
 ) -> None:
     """
-    Welcome to turbo docs! This tool is designed to help you manage your documentation.
-
     Pull text from all files in the current directory and apply the following commands:
 
     'turbo_docs --copy' copies the text to clipboard - Useful for wokring with ChatGPT
