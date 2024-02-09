@@ -1,10 +1,11 @@
 TEMPLATE = """
-"You are an expert software developement assistant. Write a README.md for the following repo:
+"You are an expert software developement assistant. Write a professional README.md for the following repo:
 {repo}
 
-- Imagine this repo were trending on GitHub. What sort of information is required in a readme of this caliber?
+- Imagine this repo were trending on GitHub.
 - Write from the perspective of the user and from a contributer. Curate a best in class user experience by providing ample detail, context, and examples.
 - emoji are encouraged. One for each section at minimum.
+- go all out, this readme should have a wow factor.
 """
 
 
